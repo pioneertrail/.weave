@@ -1,57 +1,123 @@
-Chronovyan Language Development Roadmap (Conceptual Design Phases):
+# Chronovyan Language Development Roadmap
 
-Phase 1: Solidify the Foundation - The Chronovyan Manifesto & Core Philosophy
+## Current Status: Phase 1 (In Progress) - Foundation & Philosophy
 
-Objective: To create a comprehensive and inspiring document that clearly articulates the language's vision, core principles, and the duality of Conformist vs. Rebel paths.
-Steps:
-Flesh out each section of the Manifesto outline we created.
-Refine the philosophical underpinnings – what does it mean to program in Chronovyan?
-Ensure the Manifesto resonates with the album's lore and themes.
-Phase 2: Define the Lexicon & Grammar - Detailed Syntax and Semantics
+### Completed:
+- Initial Manifesto structure with core philosophy
+- Documentation of the duality between Order and Flux
+- Basic exploration of Conformist and Rebel paths
+- Initial documentation structure and organization
 
-Objective: To move from conceptual syntax to a more detailed (though still illustrative for our purposes) definition of the language's structure.
-Steps:
-Finalize the list of keywords (CONF, REB, CYCLE, REWIND_FLOW, AETHEL, CHRONON, etc.).
-Detail the syntax for all variable declarations (including all flags like ::STATIC, ::FLUX, ::WEAVER) and their precise meanings/behaviors.
-Specify the syntax and operational semantics for all loop constructs (standard and rebel).
-Define data types more thoroughly (basic types, Chronovyan-specific types like TEMPORAL_SIGNATURE).
-Outline expression syntax (operators, precedence).
-Basic function definition and call syntax.
-Phase 3: Engineer the Mechanics - Core Feature Deep Dive
+### In Progress:
+- Refining the philosophical underpinnings
+- Expanding the Manifesto with detailed sections
+- Developing the narrative of programming as temporal weaving
 
-Objective: To meticulously detail the workings of Chronovyan's unique features.
-Steps:
-Resource Economy: Precisely how Chronons are allocated/consumed; how Aethel is generated/spent; mechanics of Temporal Debt, Paradoxical Collapse, Time Warden interactions.
-Temporal Commands: For each command (e.g., REWIND_FLOW, SUSPEND_TIMELINE), detail its parameters, effects, Aethel cost, stability risks, and interaction with different variable types/flags.
-Loot Infusion System: How "loot" is defined (data structure), how it's "bonded" to variables, specific effects of different loot types, and how loot might be "earned" or discovered through programmatic achievements.
-Error Handling & Glitches: Define types of errors (standard vs. temporal anomalies/paradoxes) and how the language might allow programmers to handle (or even intentionally trigger/utilize) them.
-Phase 4: Build the Toolkit - Standard Library Concepts
+## Phase 2: Core Language Design
 
-Objective: To envision essential built-in functions and modules that a Chronovyan programmer would need.
-Steps:
-Core Utilities: Basic I/O, string manipulation, data structures (perhaps with CONF/REB variants).
-Temporal Library: Functions to query current Chronon budget, Aethel level, system stability, upcoming "Time Storms"; functions to interact with the Chronos Scheduler (if allowed).
-Conformist Path Library: Modules for building highly stable, verifiable systems.
-Rebel Path Library: Modules for advanced temporal analysis, paradox detection, or even benign "glitch art" generation.
-Phase 5: Envision the Ecosystem - Tooling & Environment
+### 2.1 Variable System
+- [ ] Define CONF and REB variable types
+- [ ] Implement variable flags (::STATIC, ::VOLATILE, ::ANCHOR, ::WEAVER)
+- [ ] Design temporal variable properties
+- [ ] Create variable interaction rules
 
-Objective: To further conceptualize the developer experience.
-Steps:
-Detailed features of the Chronicle Compiler/Interpreter (how it handles dual paths, warnings, optimizations).
-Advanced capabilities of the Deja Vu Debugger (visualizing timelines, resource flow, loot effects).
-Concepts for "Temporal Proving Grounds" (testing environments).
-Phase 6: "Hello, Chronos!" - Illustrative Programs
+### 2.2 Loop Mechanics
+- [ ] Design standard loop constructs (FOR_CHRONON, WHILE_EVENT)
+- [ ] Implement rebel loops (REWIND_FLOW, TEMPORAL_ECHO_LOOP)
+- [ ] Define loop control mechanisms
+- [ ] Create loop stability metrics
 
-Objective: To write a few conceptual example programs in Chronovyan to test and showcase the language design.
-Steps:
-A simple "Conformist" program demonstrating stability and order.
-A daring "Rebel" program showcasing temporal manipulation and resource gambling.
-A program that attempts to find "balance" between the two paths.
-Phase 7: Share the Weave - Documentation & Lore Finalization
+### 2.3 Resource System
+- [ ] Define Chronon allocation and consumption
+- [ ] Design Aethel generation and spending
+- [ ] Implement temporal debt mechanics
+- [ ] Create resource monitoring tools
 
-Objective: To complete the suite of documentation we outlined, ensuring it's all thematically consistent and inspiring.
-Steps:
-Write the "Path of the Conformist" and "Rebel's Handbook" (with its hidden section!).
-Finalize the "Aethel & Chronon Economy" guide.
-Consider other useful guides or lore documents.
-This roadmap is a series of creative design sprints we can embark on. It doesn't have to be strictly linear, and we can focus on the parts that excite you most. The "getting started" part is exactly what we're doing: dreaming it up, and then giving that dream structure, piece by piece.
+## Phase 3: Advanced Features
+
+### 3.1 Loot System
+- [ ] Design loot types and properties
+- [ ] Implement loot discovery mechanics
+- [ ] Create loot infusion system
+- [ ] Define loot effects and interactions
+
+### 3.2 Error Handling
+- [ ] Design temporal paradox detection
+- [ ] Implement glitch handling
+- [ ] Create recovery mechanisms
+- [ ] Define error reporting system
+
+### 3.3 Development Tools
+- [ ] Design Chronicle Compiler
+- [ ] Implement Deja Vu Debugger
+- [ ] Create Temporal Proving Grounds
+- [ ] Develop resource monitoring tools
+
+## Phase 4: Standard Library
+
+### 4.1 Core Utilities
+- [ ] Design basic I/O operations
+- [ ] Implement data structures
+- [ ] Create string manipulation
+- [ ] Define file operations
+
+### 4.2 Temporal Library
+- [ ] Design time manipulation functions
+- [ ] Implement resource monitoring
+- [ ] Create stability analysis tools
+- [ ] Define temporal event handling
+
+### 4.3 Path-Specific Libraries
+- [ ] Design Conformist utilities
+- [ ] Implement Rebel tools
+- [ ] Create hybrid path support
+- [ ] Define path-specific optimizations
+
+## Phase 5: Documentation & Examples
+
+### 5.1 Core Documentation
+- [ ] Complete the Manifesto
+- [ ] Write language specification
+- [ ] Create API documentation
+- [ ] Develop best practices guide
+
+### 5.2 Example Programs
+- [ ] Create Conformist examples
+- [ ] Develop Rebel demonstrations
+- [ ] Build hybrid applications
+- [ ] Document real-world use cases
+
+### 5.3 Learning Resources
+- [ ] Write tutorials
+- [ ] Create interactive examples
+- [ ] Develop learning paths
+- [ ] Build community resources
+
+## Phase 6: Community & Ecosystem
+
+### 6.1 Development Tools
+- [ ] Design IDE integration
+- [ ] Implement package manager
+- [ ] Create build system
+- [ ] Develop testing framework
+
+### 6.2 Community Building
+- [ ] Establish contribution guidelines
+- [ ] Create community resources
+- [ ] Develop governance model
+- [ ] Build communication channels
+
+### 6.3 Future Directions
+- [ ] Research advanced features
+- [ ] Plan language evolution
+- [ ] Design extension system
+- [ ] Create roadmap for future versions
+
+## Notes
+
+- This roadmap is a living document and will evolve as we develop Chronovyan
+- Phases may overlap and can be worked on in parallel
+- Priority will be given to core features that demonstrate the language's unique philosophy
+- Each phase should maintain the balance between Conformist and Rebel approaches
+
+Remember: In Chronovyan, development is not just about building a language – it's about weaving a new reality in code. 
