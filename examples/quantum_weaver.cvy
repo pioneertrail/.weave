@@ -1,0 +1,52 @@
+// quantum_weaver.cvy - Demonstrating quantum probabilistic programming
+
+print "Chronovyan Quantum Weaver Example";
+
+// Declare a variable with the WEAVER flag for quantum superposition
+WEAVER var quantumBit = 0;
+
+// Set up a probabilistic distribution (50% chance of 0, 50% chance of 1)
+set_probability(quantumBit, 0, 0.5);
+set_probability(quantumBit, 1, 0.5);
+
+print "Quantum bit is in superposition";
+
+// Create multiple timeline branches to observe different outcomes
+print "Creating 5 timeline branches to observe quantum collapse...";
+
+for_chronon (i = 1 to 5) {
+    // Create a new timeline branch
+    branch_timeline;
+    
+    // Observe the quantum bit (forcing collapse)
+    var result = observe(quantumBit);
+    print "Timeline " + i + ": Quantum bit collapsed to " + result;
+    
+    // Each observation increases paradox slightly
+    print "Paradox level: " + get_paradox_level();
+}
+
+// Demonstrate REB (uncertain) variables
+print "\nDemonstrating uncertain variables:";
+REB var position = 10.0;
+set_uncertainty(position, 2.0);
+
+print "Particle position: " + position + " ± " + get_uncertainty(position);
+
+// Create an ECHO variable that remembers its history
+ECHO var timeStream = 1;
+print "Initial timeStream: " + timeStream;
+
+// Modify the variable several times
+timeStream = 2;
+timeStream = 3;
+timeStream = 4;
+
+// Print the history
+print "TimeStream history:";
+var history = get_history(timeStream);
+for_chronon (i = 0 to history.length - 1) {
+    print "State " + i + ": " + history[i];
+}
+
+print "Example complete!"; 

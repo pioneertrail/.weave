@@ -2,6 +2,7 @@
 #define CHRONOVYAN_VALUE_H
 
 #include "ast_nodes.h"
+#include "variant_fix.h"  // Include the variant fix first
 #include <variant>
 #include <vector>
 #include <map>
@@ -60,6 +61,7 @@ public:
     const Value& at(const std::string& key) const;
     Value& at(const std::string& key);
     void set(const std::string& key, Value value);
+    const std::map<std::string, Value>& getElements() const;
     
 private:
     std::map<std::string, Value> m_elements;

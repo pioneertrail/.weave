@@ -1,0 +1,45 @@
+// hello_timeline.cvy - A simple Chronovyan example
+
+// Print a greeting
+print "Welcome to Chronovyan: The Temporal Programming Language";
+
+// Declare some variables with different modifiers
+CONF var normalVar = 42;
+REB var uncertainVar = 3.14;
+
+print "Normal variable: " + normalVar;
+print "Uncertain variable: " + uncertainVar;
+
+// Create a timeline snapshot
+print "Creating timeline snapshot...";
+branch_timeline;
+
+// Modify the variables
+normalVar = 100;
+uncertainVar = 2.71;
+
+print "After modification:";
+print "Normal variable: " + normalVar;
+print "Uncertain variable: " + uncertainVar;
+
+// Rewind to the snapshot
+print "Rewinding timeline...";
+rewind_flow;
+
+print "After rewinding:";
+print "Normal variable: " + normalVar;
+print "Uncertain variable: " + uncertainVar;
+
+// Demonstrate paradox level
+print "Current paradox level: " + get_paradox_level();
+print "Increasing paradox level...";
+increase_paradox(20);
+print "New paradox level: " + get_paradox_level();
+
+// Demonstrate resource management
+print "Current aethel level: " + get_aethel_level();
+print "Consuming aethel...";
+consume_aethel(25.5);
+print "New aethel level: " + get_aethel_level();
+
+print "Example complete!"; 

@@ -1,0 +1,61 @@
+// timeline_merge.cvy - Demonstrating timeline management
+
+print "Chronovyan Timeline Management Example";
+
+// Initialize variables
+CONF var x = 10;
+CONF var y = 20;
+CONF var result = 0;
+
+print "Initial values: x = " + x + ", y = " + y + ", result = " + result;
+
+// Create the first timeline
+print "\nCreating Timeline A...";
+var timelineA = create_snapshot();
+print "Timeline A created: " + timelineA;
+
+// Modify variables in Timeline A
+x = 15;
+y = 25;
+result = x + y;
+print "Timeline A values: x = " + x + ", y = " + y + ", result = " + result;
+
+// Rewind to initial state
+rewind_flow;
+
+// Create a second timeline with different modifications
+print "\nCreating Timeline B...";
+var timelineB = create_snapshot();
+print "Timeline B created: " + timelineB;
+
+// Modify variables differently in Timeline B
+x = 5;
+y = 30;
+result = x * y;
+print "Timeline B values: x = " + x + ", y = " + y + ", result = " + result;
+
+// Merge the timelines
+print "\nMerging timelines A and B...";
+merge_timelines([timelineA, timelineB]);
+
+// In a merged timeline, CONF variables take the most recent value
+// REB variables become uncertain
+// Here, the result should be a blend of both timelines
+print "After merge: x = " + x + ", y = " + y + ", result = " + result;
+print "Paradox level: " + get_paradox_level();
+
+// Demonstrate how the paradox level affects computation
+print "\nDemonstrating paradox effects on computation:";
+if (get_paradox_level() > 20) {
+    print "WARNING: High paradox levels detected. Calculations may be unstable.";
+    
+    // In high paradox, even CONF variables may become uncertain
+    print "Uncertainty in result: ±" + get_uncertainty(result);
+    
+    // Try to reduce paradox
+    print "Attempting to reduce paradox level...";
+    decrease_paradox(15);
+    print "New paradox level: " + get_paradox_level();
+}
+
+print "Timeline merge example complete!"; 

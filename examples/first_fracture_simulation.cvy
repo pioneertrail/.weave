@@ -1,0 +1,126 @@
+// examples/first_fracture_simulation.cvy
+// Simulates a localized temporal instability event, echoing the First Fracture.
+
+ANTECEDENCE {
+    // -- Initial Universe Parameters --
+    DECLARE CONF::STATIC::ANCHOR Universe_Baseline_Stability : FLOAT = 1.0; // Max stability
+    DECLARE REB::FLUX Mini_Universe_Integrity : FLOAT = Universe_Baseline_Stability;
+    DECLARE CONF::STATIC Critical_Integrity_Threshold : FLOAT = 0.2;
+    DECLARE CONF::STATIC Max_Paradox_Allowed : PARADOX_LEVEL = 0.75; // Before Anchor intervention becomes desperate
+
+    // -- Resources --
+    DECLARE CONF Global_Aethel_Pool : AETHEL_RESERVE = 500; // System Aethel
+    // PARADOX_LEVEL will start based on environmental factors (e.g., 0.1 base + complexity)
+
+    // -- WEAVE_PATTERN Definitions --
+    // A Seeker's reckless probe that destabilizes the universe
+    DECLARE REB::FLUX Seeker_Reckless_Probe : WEAVE_PATTERN = define_pattern("Probe_The_Void", [
+        // This pattern internally would contain high-risk operations:
+        // - Creating multiple, conflicting REB::FLUX variables.
+        // - Attempting a deep, unshielded BRANCH into an unknown timeline.
+        // - Forcing a REWIND on a core system echo without proper anchoring.
+        // These actions would dramatically decrease Mini_Universe_Integrity
+        // and spike the local PARADOX_LEVEL within this pattern's execution.
+        // Let's simulate its effect:
+        Mini_Universe_Integrity = Mini_Universe_Integrity * 0.1; // Drastic drop
+        INCREASE_PARADOX_LEVEL(0.5); // Simulate high instability from this pattern
+        AETHEL_COST(150) // Consumes Aethel recklessly
+    ]);
+    // Instability_Index for Seeker_Reckless_Probe would be very high, e.g., 0.8
+
+    // An Anchor's intervention pattern to try and stabilize
+    DECLARE CONF::STATIC Anchor_Containment_Protocol : WEAVE_PATTERN = define_pattern("Temporal_Ward_Sigma", [
+        // This pattern would:
+        // - Consume significant Aethel from Global_Aethel_Pool.
+        // - Attempt to REWIND_TO a recent stable anchor point if available.
+        // - INFUSE stability into Mini_Universe_Integrity using Aethel.
+        // - Deploy GUARDS.
+        // Simulate its effect:
+        DECREASE_PARADOX_LEVEL(AETHEL_SPENT * 0.002); // Aethel helps reduce paradox
+        Mini_Universe_Integrity += AETHEL_SPENT * 0.001; // Aethel tries to restore integrity
+        IF (Mini_Universe_Integrity > Universe_Baseline_Stability) {
+            Mini_Universe_Integrity = Universe_Baseline_Stability;
+        }
+        AETHEL_COST(Global_Aethel_Pool * 0.5) // Uses half of available Aethel to try and fix
+    ]);
+    // Instability_Index for Anchor_Containment_Protocol would be moderate, e.g., 0.3 (risk in intervention)
+}
+
+CONCURRENCY {
+    PRINT("Initiating Mini-Universe Simulation. Initial Integrity: " + Mini_Universe_Integrity);
+    PRINT("Initial PARADOX_LEVEL: " + PARADOX_LEVEL);
+    PRINT("Initial Global_Aethel_Pool: " + Global_Aethel_Pool);
+
+    // A background CONF::WEAVER process tries to maintain stability naturally (slowly)
+    || StabilityDaemon: {
+        CYCLE FOR Tick FROM 1 TO 10 { // Runs for 10 system ticks
+            IF (Mini_Universe_Integrity < Universe_Baseline_Stability) {
+                Mini_Universe_Integrity += 0.01; // Slow natural regeneration
+                DECREASE_PARADOX_LEVEL(0.005); // Slow natural decay
+            }
+            SUSPEND_FOR "1_tick"; // Represents passage of time
+        }
+    }
+
+    // The Seeker initiates their reckless probe in a parallel flow
+    || SeekerAction: {
+        PRINT("Seeker initiating 'Probe_The_Void'...");
+        APPLY_RESULT Probe_Outcome = apply_pattern(Seeker_Reckless_Probe, SELF_CONTEXT); // SELF_CONTEXT implies current scope
+        
+        IF (!Probe_Outcome.success) {
+            PRINT("Seeker's Probe itself failed due to internal paradox or resource exhaustion!");
+            // The pattern's Aethel cost might have depleted local Aethel if not drawn from Global_Aethel_Pool
+        }
+        PRINT("Integrity after Seeker's Probe: " + Mini_Universe_Integrity);
+        PRINT("PARADOX_LEVEL after Probe: " + PARADOX_LEVEL);
+    }
+
+    // This block would react to the changes from SeekerAction and StabilityDaemon
+    // For simplicity, we assume SeekerAction completes, then this evaluates.
+    // A more complex weave would use event triggers.
+    // Let's simulate an immediate reaction check after a short delay for the probe's effects to register.
+    SUSPEND_FOR "2_ticks"; // Wait for probe effects
+
+    IF (Mini_Universe_Integrity < Critical_Integrity_Threshold OR PARADOX_LEVEL > Max_Paradox_Allowed) {
+        PRINT("CRITICAL ALERT: Universe Integrity failing OR Paradox Level too high! Invoking Anchor Protocol!");
+        // Check Aethel before attempting intervention
+        IF (Global_Aethel_Pool > calculate_cost(Anchor_Containment_Protocol)) { // Assuming calculate_cost is a stdlib func
+             APPLY_RESULT Containment_Outcome = apply_pattern(Anchor_Containment_Protocol, SELF_CONTEXT);
+             IF (Containment_Outcome.success) {
+                 PRINT("Anchor Protocol deployed. New Integrity: " + Mini_Universe_Integrity);
+             } ELSE {
+                 PRINT("Anchor Protocol FAILED to deploy successfully (e.g. internal paradox in pattern). Catastrophic failure imminent.");
+                 Mini_Universe_Integrity = 0.0; // Total collapse
+             }
+        } ELSE {
+            PRINT("Insufficient Global Aethel for Anchor Protocol! Catastrophe unavoidable!");
+            Mini_Universe_Integrity = 0.0; // Total collapse
+        }
+        PRINT("PARADOX_LEVEL after Anchor attempt: " + PARADOX_LEVEL);
+    }
+}
+
+CONSEQUENCE {
+    PRINT("Simulation Concluded.");
+    DEJAVU(System_State, PARADOX_LEVEL, "First_Fracture_Sim_Audit");
+
+    IF (Mini_Universe_Integrity <= 0.01) { // Assuming 0.01 as practically unraveled
+        PRINT("OUTCOME: Localized Great Unraveling Event Sim-Sigma! The void claims this thread.");
+        LOOT_TABLE { 
+            0.8: LOOT("Shard_of_Broken_Time"), // Common dangerous artifact
+            0.2: LOOT("Echo_of_the_Void")       // Rarer, more potent
+        }
+        NOTIFY_ANCHOR_CASTE("SIMULATION FAILURE: Localized Unraveling Event Sigma. Log archived.");
+    } ELSE IF (Mini_Universe_Integrity < Critical_Integrity_Threshold) {
+        PRINT("OUTCOME: Severe Temporal Damage. Timeline scarred but persists. Anchor intervention was partial.");
+        LOOT_TABLE { 0.5: LOOT("Warped_Reality_Fragment"); }
+        NOTIFY_ANCHOR_CASTE("SIMULATION WARNING: Severe Temporal Damage in Sim-Sigma.");
+    }
+    ELSE {
+        PRINT("OUTCOME: Anchor Protocol successful or Seeker's actions were not catastrophic. Universe integrity maintained at: " + Mini_Universe_Integrity);
+        LOOT_TABLE { 0.6: LOOT("Glyph_of_Containment"); }
+        NOTIFY_ANCHOR_CASTE("SIMULATION STABLE: Sim-Sigma integrity preserved.");
+    }
+    PRINT("Final Global_Aethel_Pool: " + Global_Aethel_Pool);
+    PRINT("Final PARADOX_LEVEL: " + PARADOX_LEVEL);
+} 

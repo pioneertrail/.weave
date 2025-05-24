@@ -13,7 +13,7 @@ namespace chronovyan {
  * @class Environment
  * @brief Stores and manages variables in a scope hierarchy
  */
-class Environment {
+class Environment : public std::enable_shared_from_this<Environment> {
 public:
     /**
      * @brief Create a new global environment

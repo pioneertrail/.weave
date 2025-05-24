@@ -1,0 +1,5 @@
+// minimal.cvy - A minimal example that might work with the current parser
+
+42
+
+// That's it - just an integer literal 

@@ -1,0 +1,143 @@
+// examples/synth_weavers_gambit.cvy
+// A program that attempts to heal a corrupted temporal data structure,
+// embodying the Synth-Weaver's mending abilities.
+
+ANTECEDENCE {
+    // -- Corrupted Data Structure --
+    // Imagine a CONF_ARRAY of TEMPORAL_SIGNATURES representing a critical timeline log.
+    // Some signatures are "glitched" (invalid or paradoxical).
+    DECLARE CONF::STATIC Corrupted_Timeline_Log_Size : INT = 50;
+    DECLARE REB::ECHO Timeline_Log : CONF_ARRAY = create_temporal_array(Corrupted_Timeline_Log_Size);
+    // ... (Code to populate Timeline_Log with some valid and some "glitched" signatures) ...
+    // For example, a glitched signature might be a predefined "PARADOX_SIGNATURE" constant.
+    // Let's assume ~20% are glitched for this simulation.
+    // Example: Timeline_Log[10] = PARADOX_SIGNATURE; Timeline_Log[25] = PARADOX_SIGNATURE; etc.
+
+    DECLARE CONF::STATIC Max_Repair_Cycles : INT = 10;
+    DECLARE CONF::STATIC Aethel_Per_Repair_Attempt : AETHEL_RESERVE = 25;
+    DECLARE CONF::STATIC Repair_Success_Chance_Base : FLOAT = 0.6; // Base chance to repair a glitch
+
+    // -- Resources & Loot --
+    DECLARE REB::FLUX Available_Aethel : AETHEL_RESERVE = 200;
+    // Available "loot" that can aid in repair
+    DECLARE CONF Healing_Loot_Available : BOOLEAN = true; // Let's say we have some
+    DECLARE CONF::STATIC Healing_Loot_Item : STRING = "Synth_Weavers_Focusing_Crystal";
+    DECLARE CONF::STATIC Loot_Repair_Bonus : FLOAT = 0.25; // Loot increases success chance
+
+    // -- WEAVE_PATTERN for Repair Attempt --
+    DECLARE REB::WEAVER Attempt_Repair_Signature : WEAVE_PATTERN = define_pattern("MendGlitch", [
+        // Parameters: target_index (INT), current_log (REB::ECHO CONF_ARRAY)
+        // This pattern attempts to fix a single glitched signature.
+        DECLARE REB Target_Idx : INT;
+        DECLARE REB Current_Log_Ref : CONF_ARRAY; // Passed by reference or handle
+
+        // Simulate repair logic
+        DECLARE REB Random_Factor : FLOAT = random_float(0.0, 1.0); // Assuming stdlib.random_float()
+        DECLARE REB Effective_Success_Chance : FLOAT = Repair_Success_Chance_Base;
+
+        IF (Healing_Loot_Available) { // Check if Weaver decides to use loot
+            // Conceptual: INFUSE self_pattern_context WITH LOOT(Healing_Loot_Item) FOR "EnhancedFocus";
+            // This would consume the loot for this attempt if implemented with loot mechanics.
+            Effective_Success_Chance += Loot_Repair_Bonus;
+            PRINT("Repair attempt on index " + Target_Idx + " enhanced by " + Healing_Loot_Item);
+        }
+        
+        IF (Random_Factor < Effective_Success_Chance) {
+            // Current_Log_Ref[Target_Idx] = GENERATE_STABLE_SIGNATURE(); // Replace glitch
+            // For simulation, let's just mark it conceptually repaired
+            PRINT("Successfully mended signature at index: " + Target_Idx);
+            RETURN TRUE;
+        } ELSE {
+            PRINT("Repair attempt failed for signature at index: " + Target_Idx);
+            // Potentially increase local PARADOX_LEVEL for failed mending attempt
+            INCREASE_PARADOX_LEVEL(0.02);
+            RETURN FALSE;
+        }
+        AETHEL_COST(Aethel_Per_Repair_Attempt); // Consumes Aethel for the attempt
+    ]);
+    // Instability_Index for Attempt_Repair_Signature: 0.2 (moderate, as it's a REB::WEAVER action)
+}
+
+CONCURRENCY {
+    PRINT("Initiating Synth-Weaver's Gambit: Attempting to heal Corrupted Timeline Log.");
+    PRINT("Initial Aethel: " + Available_Aethel + ". Initial PARADOX_LEVEL: " + PARADOX_LEVEL);
+
+    DECLARE REB Glitches_Repaired_Count : INT = 0;
+    DECLARE REB Cycles_Taken : INT = 0;
+
+    // Main repair loop, representing the Weaver's persistent effort
+    // The DECAY factor represents the increasing difficulty or dwindling focus/resources
+    // over prolonged, intense weaving.
+    CYCLE FOR Repair_Cycle FROM 1 TO Max_Repair_Cycles (DECAY = 0.05, AETHEL_COST_PER_TICK = 5) { 
+        Cycles_Taken = Repair_Cycle;
+        PRINT("--- Repair Cycle: " + Repair_Cycle + " ---");
+        DECLARE BOOLEAN Glitch_Found_This_Cycle = false;
+
+        // Scan for glitches and attempt repair
+        CYCLE FOR Idx FROM 0 TO Corrupted_Timeline_Log_Size - 1 {
+            // Assuming PARADOX_SIGNATURE is a way to identify glitches
+            // IF (Timeline_Log[Idx] == PARADOX_SIGNATURE) { 
+            // For this conceptual example, let's just pick a few to try and repair each cycle
+            // to avoid complex state checking in this illustration.
+            // Let's say we try to repair up to 2 glitches per cycle if found.
+            IF (Idx == 10 && Timeline_Log[Idx] /*is still glitched - needs actual state check*/ ) { // Placeholder
+                Glitch_Found_This_Cycle = true;
+                PRINT("Attempting repair on known glitch at index: 10");
+                IF (Available_Aethel >= calculate_cost(Attempt_Repair_Signature)) {
+                    Available_Aethel -= calculate_cost(Attempt_Repair_Signature); // Manual cost deduction for example
+                    IF (apply_pattern(Attempt_Repair_Signature, [10, Timeline_Log])) {
+                        Glitches_Repaired_Count += 1;
+                        // Timeline_Log[10] would be updated by the pattern if truly mutable
+                    }
+                } ELSE { PRINT("Insufficient Aethel for repair attempt on index 10."); BREAK_CYCLE; } // Break inner loop
+            }
+            IF (Idx == 25 && Timeline_Log[Idx] /*is still glitched*/) { // Placeholder
+                 Glitch_Found_This_Cycle = true;
+                PRINT("Attempting repair on known glitch at index: 25");
+                 IF (Available_Aethel >= calculate_cost(Attempt_Repair_Signature)) {
+                    Available_Aethel -= calculate_cost(Attempt_Repair_Signature);
+                    IF (apply_pattern(Attempt_Repair_Signature, [25, Timeline_Log])) {
+                        Glitches_Repaired_Count += 1;
+                    }
+                } ELSE { PRINT("Insufficient Aethel for repair attempt on index 25."); BREAK_CYCLE; }
+            }
+            IF (Glitches_Repaired_Count >= 2 && Glitch_Found_This_Cycle) { BREAK_CYCLE; } // Max 2 repairs per outer cycle
+        }
+
+        IF (!Glitch_Found_This_Cycle && Repair_Cycle > 1) { // If no glitches found (simplified check)
+            PRINT("No more glitches readily found or all repair attempts made for this cycle.");
+            // A real version might have better glitch detection
+            BREAK_CYCLE; // Break outer loop
+        }
+        
+        IF (Available_Aethel < Aethel_Per_Repair_Attempt * 0.5) { // Arbitrary low Aethel threshold
+            PRINT("Aethel reserves critically low. Halting repair efforts.");
+            BREAK_CYCLE; // Break outer loop
+        }
+
+        // Rebel Weavers might use REWIND_FLOW here if a cycle goes badly,
+        // attempting a different strategy, at higher Aethel cost and PARADOX_LEVEL increase.
+        // e.g., IF (This_Cycle_Bad_Outcome) { INVOKE REWIND_FLOW(target: SELF_LOOP_ID, steps:1); }
+    }
+}
+
+CONSEQUENCE {
+    PRINT("Synth-Weaver's Gambit Concluded.");
+    DEJAVU(Timeline_Log, PARADOX_LEVEL, "Timeline_Log_Repair_Audit");
+
+    PRINT("Repair Cycles Taken: " + Cycles_Taken);
+    PRINT("Total Glitches Repaired (Conceptual): " + Glitches_Repaired_Count);
+    PRINT("Remaining Aethel: " + Available_Aethel);
+    PRINT("Final PARADOX_LEVEL: " + PARADOX_LEVEL);
+
+    IF (Glitches_Repaired_Count > 0) { // Simplified success condition
+        PRINT("The Timeline Log echoes with newfound stability, a testament to the Weaver's art.");
+        LOOT_TABLE { 
+            0.7: LOOT("Resonant_Echo_Crystal"), // Loot for successful mending
+            0.3: LOOT("Pattern_of_Healing_Weave") 
+        }
+    } ELSE {
+        PRINT("The corruption lingers, or resources were insufficient. The gambit was costly.");
+        NOTIFY_ANCHOR_CASTE("Timeline Log remains significantly corrupted after repair attempt.");
+    }
+}

@@ -69,6 +69,10 @@ void ChronovyanMap::set(const std::string& key, Value value) {
     m_elements[key] = std::move(value);
 }
 
+const std::map<std::string, Value>& ChronovyanMap::getElements() const {
+    return m_elements;
+}
+
 // Value implementation
 
 Value::Value() : m_value(std::monostate()) {}
@@ -344,6 +348,7 @@ std::string Value::toString() const {
             return std::to_string(std::get<int64_t>(m_value));
             
         case Type::FLOAT: {
+            ss << std::fixed << std::setprecision(6);
             ss << std::get<double>(m_value);
             return ss.str();
         }
@@ -354,7 +359,7 @@ std::string Value::toString() const {
         case Type::ARRAY: {
             const auto& array = asArray();
             ss << "[";
-            for (size_t i = 0; i < array.size(); i++) {
+            for (size_t i = 0; i < array.size(); ++i) {
                 if (i > 0) {
                     ss << ", ";
                 }
@@ -365,9 +370,26 @@ std::string Value::toString() const {
         }
             
         case Type::MAP: {
-            // Use a simpler implementation for now
             const auto& map = asMap();
-            return "<map with " + std::to_string(map.size()) + " elements>";
+            ss << "{";
+            bool first = true;
+            // Unfortunately we can't easily iterate over the map in a deterministic order
+            // So we'll collect the keys, sort them, and then output in order
+            std::vector<std::string> keys;
+            for (const auto& pair : map.getElements()) {
+                keys.push_back(pair.first);
+            }
+            std::sort(keys.begin(), keys.end());
+            
+            for (const auto& key : keys) {
+                if (!first) {
+                    ss << ", ";
+                }
+                first = false;
+                ss << key << ": " << map.at(key).toString();
+            }
+            ss << "}";
+            return ss.str();
         }
             
         case Type::NATIVE_FUNCTION:
@@ -387,7 +409,7 @@ bool Value::equals(const Value& other) const {
     
     switch (getType()) {
         case Type::NIL:
-            return true;
+            return true; // All nil values are equal
             
         case Type::BOOLEAN:
             return std::get<bool>(m_value) == std::get<bool>(other.m_value);
@@ -401,11 +423,44 @@ bool Value::equals(const Value& other) const {
         case Type::STRING:
             return std::get<std::string>(m_value) == std::get<std::string>(other.m_value);
             
-        case Type::ARRAY:
-        case Type::MAP:
+        case Type::ARRAY: {
+            const auto& thisArray = asArray();
+            const auto& otherArray = other.asArray();
+            
+            if (thisArray.size() != otherArray.size()) {
+                return false;
+            }
+            
+            for (size_t i = 0; i < thisArray.size(); ++i) {
+                if (!thisArray.at(i).equals(otherArray.at(i))) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+            
+        case Type::MAP: {
+            const auto& thisMap = asMap();
+            const auto& otherMap = other.asMap();
+            
+            if (thisMap.size() != otherMap.size()) {
+                return false;
+            }
+            
+            // Check that every key in thisMap exists in otherMap and has the same value
+            for (const auto& pair : thisMap.getElements()) {
+                if (!otherMap.contains(pair.first) || !pair.second.equals(otherMap.at(pair.first))) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+            
         case Type::NATIVE_FUNCTION:
         case Type::CHRONOVYAN_FUNCTION:
-            // Reference equality for complex types
+            // Functions are only equal if they are the same object
             return &m_value == &other.m_value;
     }
     

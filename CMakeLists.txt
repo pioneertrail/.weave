@@ -1,45 +1,55 @@
 cmake_minimum_required(VERSION 3.14)
-project(Chronovyan VERSION 0.1.0 LANGUAGES CXX)
+
+# Use vcpkg if available
+if(DEFINED ENV{VCPKG_ROOT})
+    include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
+endif()
+
+project(chronovyan VERSION 0.1.0 LANGUAGES CXX)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Compiler warnings
+# Set compiler options
 if(MSVC)
-  add_compile_options(/W4 /WX)
+    add_compile_options(/W4 /WX)
 else()
-  add_compile_options(-Wall -Wextra -Wpedantic)
+    add_compile_options(-Wall -Wextra -pedantic)
+    
+    # Fix for MinGW std::variant issue
+    if(MINGW)
+        add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+    endif()
 endif()
 
-# Include directories
-include_directories(include)
+# Define include directories
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# Source files
-set(SOURCES
+# Main executable
+add_executable(chronovyan 
     src/main.cpp
-    src/source_file.cpp
+    src/value.cpp
     src/lexer.cpp
     src/token.cpp
     src/parser.cpp
-    src/ast_nodes.cpp
     src/interpreter.cpp
-    src/value.cpp
-    src/environment.cpp
-    src/temporal_runtime.cpp
     src/error_handler.cpp
+    src/environment.cpp
+    src/source_file.cpp
     src/source_location.cpp
+    src/ast_nodes.cpp
+    src/temporal_runtime.cpp
 )
 
-# Add executable
-add_executable(chronovyan ${SOURCES})
-
-# Add test executable if tests are enabled
-option(BUILD_TESTS "Build tests" ON)
+# Option to build tests
+option(BUILD_TESTS "Build tests" OFF)
 if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-# Install rules
-install(TARGETS chronovyan DESTINATION bin) 
+# Install
+install(TARGETS chronovyan
+    RUNTIME DESTINATION bin
+) 

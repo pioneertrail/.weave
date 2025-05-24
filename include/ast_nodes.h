@@ -1,6 +1,7 @@
 #ifndef CHRONOVYAN_AST_NODES_H
 #define CHRONOVYAN_AST_NODES_H
 
+#include "variant_fix.h"
 #include "token.h"
 #include "source_location.h"
 #include <memory>
