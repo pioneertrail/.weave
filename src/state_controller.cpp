@@ -548,6 +548,8 @@ void StateController::updateMode(const ModeDecision& decision) {
 
 // Handle error state from a decision
 void StateController::handleErrorState(const ModeDecision& decision, std::chrono::system_clock::time_point timestamp, bool bypass_cooldown) {
+    // TODO(TECH-DEBT): Refactor error handling to use a polymorphic error type system - Improves error handling extensibility - v1.2
+    
     // Notify about error
     notification_service_->notifyError(decision.reason);
     
@@ -575,6 +577,8 @@ void StateController::handleErrorState(const ModeDecision& decision, std::chrono
 
 // Handle fallback mode from a decision
 void StateController::handleFallbackMode(const ModeDecision& decision, std::chrono::system_clock::time_point timestamp, bool bypass_cooldown) {
+    // TODO(TECH-DEBT): Consolidate fallback and error handling logic to remove duplication - Reduces maintenance burden - v1.2
+    
     // Notify about error - for fallback, always send error notification regardless of is_error_state
     notification_service_->notifyError(decision.reason);
     
