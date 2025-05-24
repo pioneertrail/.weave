@@ -1,48 +1,51 @@
 # Chronovyan Language Development Roadmap
 
-## Current Status: Phase 1 (In Progress) - Foundation & Philosophy
+## Current Status: Phase 2 (Completed) - Core Language Design & Specification
 
 ### Completed:
 - Initial Manifesto structure with core philosophy
 - Documentation of the duality between Order and Flux
 - Basic exploration of Conformist and Rebel paths
 - Initial documentation structure and organization
-
-### In Progress:
 - Refining the philosophical underpinnings
 - Expanding the Manifesto with detailed sections
 - Developing the narrative of programming as temporal weaving
+- Formal language specification with comprehensive grammar
+- Detailed semantics documentation for runtime behavior
+- Complete data type system with CONF and REB modifiers
+- Variable interaction rules with PARADOX_LEVEL effects
+- Loop stability metrics and optimization techniques
 
-## Phase 2: Core Language Design & Specification
+## Phase 2: Core Language Design & Specification (Completed)
 
 ### 2.1 Formal Language Specification
-- [ ] **Formal Grammar (BNF/EBNF)**: Write a complete, precise description of Chronovyan's syntax
-- [ ] **Semantics Document**: Define exactly how each construct behaves at runtime
-- [ ] **Standard Library Design**: List essential built-in functions, types, and modules
-- [ ] Collect and formalize all Chronovyan syntax from documentation and examples
-- [ ] Write a "language specification" document: keywords, grammar, variable declarations, loops, temporal commands, and data types
-- [ ] For each construct, specify its runtime behavior (e.g., how does `REWIND_FLOW` manipulate state?)
-- [ ] Decide on standard data types and temporal resource models (Chronons, Aethel, etc)
+- [x] **Formal Grammar (BNF/EBNF)**: Write a complete, precise description of Chronovyan's syntax
+- [x] **Semantics Document**: Define exactly how each construct behaves at runtime
+- [x] **Standard Library Design**: List essential built-in functions, types, and modules
+- [x] Collect and formalize all Chronovyan syntax from documentation and examples
+- [x] Write a "language specification" document: keywords, grammar, variable declarations, loops, temporal commands, and data types
+- [x] For each construct, specify its runtime behavior (e.g., how does `REWIND_FLOW` manipulate state?)
+- [x] Decide on standard data types and temporal resource models (Chronons, Aethel, etc)
 
 ### 2.2 Variable System
-- [ ] Define CONF and REB variable types
-- [ ] Implement variable flags (::STATIC, ::VOLATILE, ::ANCHOR, ::WEAVER)
-- [ ] Design temporal variable properties
-- [ ] Create variable interaction rules
+- [x] Define CONF and REB variable types
+- [x] Implement variable flags (::STATIC, ::VOLATILE, ::ANCHOR, ::WEAVER)
+- [x] Design temporal variable properties
+- [x] Create variable interaction rules
 
 ### 2.3 Loop Mechanics
-- [ ] Design standard loop constructs (FOR_CHRONON, WHILE_EVENT)
-- [ ] Implement rebel loops (REWIND_FLOW, TEMPORAL_ECHO_LOOP)
-- [ ] Define loop control mechanisms
-- [ ] Create loop stability metrics
+- [x] Design standard loop constructs (FOR_CHRONON, WHILE_EVENT)
+- [x] Implement rebel loops (REWIND_FLOW, TEMPORAL_ECHO_LOOP)
+- [x] Define loop control mechanisms
+- [x] Create loop stability metrics
 
 ### 2.4 Resource System
-- [ ] Define Chronon allocation and consumption
-- [ ] Design Aethel generation and spending
-- [ ] Implement temporal debt mechanics
-- [ ] Create resource monitoring tools
+- [x] Define Chronon allocation and consumption
+- [x] Design Aethel generation and spending
+- [x] Implement temporal debt mechanics
+- [x] Create resource monitoring tools
 
-## Phase 3: Reference Implementation
+## Phase 3: Reference Implementation (Next Phase)
 
 ### 3.1 Interpreter Architecture
 - [ ] **Choose Implementation Language**: Select a host language for the interpreter (Python, C++, Rust, etc.)
