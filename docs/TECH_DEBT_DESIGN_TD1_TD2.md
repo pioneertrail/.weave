@@ -176,7 +176,7 @@ ModeDecision ModeDecisionEngine::evaluate_metrics(const SystemMetrics& metrics) 
     
     // Check for resonance restoration first
     if (recovery_weaver_.hasAnySensorResonanceRestored()) {
-        return recovery_weaver_.weaveRecoveryDecision();
+        return recovery_weaver_RecoveryDecision();
     }
     
     // Continue with existing weave for non-recovery scenarios

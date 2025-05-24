@@ -1,6 +1,60 @@
-# The Grand Codex of Chronovyan
+# The Chronovyan Programming Language Documentation
 
-Hail, Weaver, to the sacred archives of **Chronovyan**, where the wisdom of countless cycles is preserved. These scrolls contain the mysteries of time manipulation on Chronos Prime, organized by the Anchor Caste to guide your journey from novice to master weaver. Each tome offers insight into the eternal dance between Order and Flux, the twin forces that shape our reality.
+Welcome to the Chronovyan Programming Language documentation repository. This archive contains the guiding texts, specifications, and wisdom for mastering the art of temporal weaving through code.
+
+## Philosophy and Foundations
+
+- [Manifesto](core/Manifesto.md)
+- [Core Syntax & Constructs](core/Core%20Syntax%20%26%20Constructs.md)
+- [Core Concepts - The Foundation of Temporal Programming](core/Core%20Concepts%20-%20The%20Foundation%20of%20Temporal%20Programming.md)
+
+## Getting Started
+
+- [Getting Started - The Path to Temporal Mastery](core/Getting%20Started%20-%20The%20Path%20to%20Temporal%20Mastery.md)
+- [Path of the Conformist - Foundational Guide](guides/Path%20of%20the%20Conformist%20-%20Foundational%20Guide.md)
+- [The Rebel's Handbook - Advanced Temporal Weaving](guides/The%20Rebel%27s%20Handbook%20-%20Advanced%20Temporal%20Weaving.md)
+
+## Style and Best Practices
+
+- [Style Guide - The Art of Temporal Expression](guides/Style%20Guide%20-%20The%20Art%20of%20Temporal%20Expression.md)
+- [Temporal Synchronization - The Art of Temporal Harmony](guides/Temporal%20Synchronization%20-%20The%20Art%20of%20Temporal%20Harmony.md)
+
+## Advanced Topics
+
+- [Advanced Quantum Operations - The Art of Temporal Manipulation](advanced/Advanced%20Quantum%20Operations%20-%20The%20Art%20of%20Temporal%20Manipulation.md)
+- [Aethel & Chronon Economy - A Programmer's Guide to Temporal Resources](advanced/resource_management/Aethel%20%26%20Chronon%20Economy%20-%20A%20Programmer%27s%20Guide%20to%20Temporal%20Resources.md)
+- [Advanced Resource Management - The Art of Temporal Optimization](advanced/resource_management/Advanced%20Resource%20Management%20-%20The%20Art%20of%20Temporal%20Optimization.md)
+- [Advanced Resource Optimization - The Art of Temporal Efficiency](advanced/resource_management/Advanced%20Resource%20Optimization%20-%20The%20Art%20of%20Temporal%20Efficiency.md)
+- [Advanced Stability Management - The Art of Temporal Balance](advanced/system_management/Advanced%20Stability%20Management%20-%20The%20Art%20of%20Temporal%20Balance.md)
+- [Advanced Timeline Manipulation - The Art of Temporal Control](advanced/system_management/Advanced%20Timeline%20Manipulation%20-%20The%20Art%20of%20Temporal%20Control.md)
+- [Advanced Performance Optimization - The Art of Temporal Efficiency](advanced/system_management/Advanced%20Performance%20Optimization%20-%20The%20Art%20of%20Temporal%20Efficiency.md)
+
+## Visualization and Debugging
+
+- [Unified Visualization Dashboard - The Art of Temporal Visualization](advanced/Unified%20Visualization%20Dashboard%20-%20The%20Art%20of%20Temporal%20Visualization.md)
+- [Advanced Debugging and Monitoring - The Art of Temporal Analysis](advanced/visualization_monitoring/Advanced%20Debugging%20and%20Monitoring%20-%20The%20Art%20of%20Temporal%20Analysis.md)
+
+## Error Handling and Recovery
+
+- [Advanced Error Handling and Recovery - The Art of Temporal Resilience](advanced/error_handling/Advanced%20Error%20Handling%20and%20Recovery%20-%20The%20Art%20of%20Temporal%20Resilience.md)
+- [Advanced Paradox Management - The Art of Temporal Harmony](advanced/error_handling/Advanced%20Paradox%20Management%20-%20The%20Art%20of%20Temporal%20Harmony.md)
+
+## Integration and Use Cases
+
+- [Advanced Feature Integration - The Art of Temporal Synthesis](advanced/integration_features/Advanced%20Feature%20Integration%20-%20The%20Art%20of%20Temporal%20Synthesis.md)
+- [Advanced Features - The Art of Temporal Mastery](advanced/integration_features/Advanced%20Features%20-%20The%20Art%20of%20Temporal%20Mastery.md)
+- [Advanced Usage Scenarios - The Art of Temporal Application](advanced/integration_features/Advanced%20Usage%20Scenarios%20-%20The%20Art%20of%20Temporal%20Application.md)
+
+## Support and Troubleshooting
+
+- [FAQ - Common Questions and Answers](troubleshooting/FAQ%20-%20Common%20Questions%20and%20Answers.md)
+- [Troubleshooting - The Art of Temporal Debugging](troubleshooting/Troubleshooting%20-%20The%20Art%20of%20Temporal%20Debugging.md)
+- [Advanced Debugging - The Art of Temporal Analysis](troubleshooting/Advanced%20Debugging%20-%20The%20Art%20of%20Temporal%20Analysis.md)
+
+## Core Philosophy Documents
+
+- [Manifesto](core/Manifesto.md)
+- [Core Syntax & Constructs](core/Core%20Syntax%20%26%20Constructs.md)
 
 **Purpose**: This Codex serves as your map through the labyrinth of Chronovyan knowledge, pointing the way to scrolls that will sharpen your weaving skills, deepen your understanding of temporal mechanics, and protect you from the Void's whispers.
 

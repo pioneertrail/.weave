@@ -55,7 +55,7 @@ This structure reflects both functional organization and the philosophical divis
 
 We created tools to maintain the integrity of connections between documents:
 
-- A cross-reference validation script (`scripts/check_cross_references.py`) that detects broken links
+- A cross-reference validation script (`../scripts/check_cross_references.py`) that detects broken links
 - Updated references to match the new directory structure
 - Consistent link formats across all documentation
 
@@ -73,31 +73,8 @@ We laid the groundwork for Phase 3 by creating:
 
 To support ongoing maintenance of the documentation, we created several tools:
 
-1. **Organization Script** (`scripts/organize_docs.sh`): A shell script that implements the recommended directory structure
+1. **Organization Script** (`../scripts/organize_docs.sh`): A shell script that implements the recommended directory structure
 
-2. **Cross-Reference Validator** (`scripts/check_cross_references.py`): A Python script that checks for broken links between documents
+2. **Cross-Reference Validator** (`../scripts/check_cross_references.py`): A Python script that validates all cross-references in the documentation
 
-3. **Requirements File** (`scripts/requirements.txt`): Dependencies for the Python tools
-
-These tools embody the principles of automation and consistency that underlie the Chronovyan philosophy, allowing future contributors to maintain order with minimal effort.
-
-## The Path Forward
-
-With this Great Ordering complete, the Chronovyan documentation now stands ready for the challenges of Phase 3 and beyond. The clear structure, consistent style, and robust cross-referencing will serve as a solid foundation for the expanding knowledge base that will accompany the implementation of the language.
-
-Future custodians of the Codex should:
-
-1. **Maintain the Structure**: Place new documents in the appropriate directories
-2. **Preserve the Style**: Follow the narrative conventions established
-3. **Validate Connections**: Run the cross-reference checker regularly
-4. **Evolve with Purpose**: Allow the structure to grow organically but intentionally
-
-## The Archivist's Reflection
-
-This tidying ritual represents more than mere organizational housekeeping—it embodies the Chronovyan principle that structure and form are not constraints but enablers of creativity and understanding. By bringing order to our documentation, we have created space for the flux of new ideas that will emerge in Phase 3.
-
-May future Weavers find wisdom in these ordered paths, and may the Chronovyan Codex continue to grow in both depth and accessibility.
-
----
-
-*"To order knowledge is to prepare the mind for discovery. The well-tended archive does not constrain thought but channels it, like the banks of a river guide water to the sea."* — Archive Keeper's Meditation 
+3. **Requirements File** (`scripts/requirements.txt`

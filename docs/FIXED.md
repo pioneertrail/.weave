@@ -47,4 +47,29 @@ This document lists the specific issues that were fixed in the Chronovyan interp
 
 3. **Temporal Operations**
    - Added foundations for temporal operations (not fully implemented yet)
-   - Created structure for managing timelines and time points 
+   - Created structure for managing timelines and time points
+
+## Parser Improvements
+
+Fixed issues in the parser to enhance error handling and improve syntax validation.
+The parser now properly handles nested expressions and validates variable declarations.
+
+## Environment Handling
+
+Fixed issues in the environment handling to correctly manage variable scope and lifecycle.
+Temporal variables are now properly tracked across different scopes.
+
+## Interpreter Optimization
+
+Fixed performance issues in the interpreter to improve execution speed.
+Reduced memory usage during interpretation of complex temporal operations.
+
+## Source Handling
+
+Fixed issues related to file loading and position tracking.
+Line and column numbers are now accurately reported in error messages.
+
+## Temporal Runtime
+
+Fixed stability issues in the temporal runtime.
+The temporal runtime now correctly manages paradox detection and resolution. 

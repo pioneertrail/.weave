@@ -7,7 +7,7 @@ In Chronovyan, even the humble file extension becomes a statement of philosophy,
 ### The Primary Weave
 ```chronovyan
 // The definitive Chronovyan source file
-program.weave {
+program.cvy {
     type: SOURCE,
     philosophy: {
         conf_ratio: 60%,
@@ -20,14 +20,14 @@ program.weave {
 }
 ```
 
-The `.weave` extension represents the raw fabric of Chronovyan code, the primary canvas upon which Weavers express their temporal vision. It is the most common extension for source files, embodying the language's core philosophy of duality.
+The `.cvy` extension represents the raw fabric of Chronovyan code, the primary canvas upon which Weavers express their temporal vision. It is the most common extension for source files, embodying the language's core philosophy of duality.
 
 ## II. Compiled Artifacts
 
 ### Conformist Output
 ```chronovyan
 // The anchored, stable executable
-program.anchor {
+program.ancvy {
     type: COMPILED,
     stability: ABSOLUTE,
     characteristics: {
@@ -38,12 +38,12 @@ program.anchor {
 }
 ```
 
-The `.anchor` extension denotes compiled programs that embrace the Conformist path, producing stable, predictable executables that adhere strictly to temporal laws.
+The `.ancvy` extension denotes compiled programs that embrace the Conformist path, producing stable, predictable executables that adhere strictly to temporal laws.
 
 ### Rebel Output
 ```chronovyan
 // The flux state executable
-program.flux {
+program.flxcvy {
     type: COMPILED,
     stability: DYNAMIC,
     characteristics: {
@@ -54,14 +54,14 @@ program.flux {
 }
 ```
 
-The `.flux` extension represents compiled programs that follow the Rebel path, producing dynamic executables that can adapt to changing temporal conditions.
+The `.flxcvy` extension represents compiled programs that follow the Rebel path, producing dynamic executables that can adapt to changing temporal conditions.
 
 ## III. Temporal Artifacts
 
 ### Loot Definitions
 ```chronovyan
 // Temporal shard definition
-temporal_shard.shard {
+temporal_shard.shdcvy {
     type: LOOT,
     properties: {
         power: TEMPORAL,
@@ -71,7 +71,7 @@ temporal_shard.shard {
 }
 
 // Weaver schematic
-weaver_schematic.infuse {
+weaver_schematic.infcvy {
     type: LOOT,
     properties: {
         power: WEAVER,
@@ -81,12 +81,12 @@ weaver_schematic.infuse {
 }
 ```
 
-The `.shard` and `.infuse` extensions define the loot that can be discovered and infused into variables, each carrying its own temporal properties and costs.
+The `.shdcvy` and `.infcvy` extensions define the loot that can be discovered and infused into variables, each carrying its own temporal properties and costs.
 
 ### Temporal Manifests
 ```chronovyan
 // Program timeline definition
-program_flow.tflow {
+program_flow.tcvy {
     type: MANIFEST,
     properties: {
         temporal_interactions: DEFINED,
@@ -96,21 +96,21 @@ program_flow.tflow {
 }
 ```
 
-The `.tflow` extension describes a program's intended interaction with time, mapping out its temporal journey and resource requirements.
+The `.tcvy` extension describes a program's intended interaction with time, mapping out its temporal journey and resource requirements.
 
 ## IV. Best Practices
 
 ### For Conformist Development
 
 1. **File Organization**
-    * Use `.weave` for source files
-    * Target `.anchor` for compilation
-    * Document with `.tflow` manifests
+    * Use `.cvy` for source files
+    * Target `.ancvy` for compilation
+    * Document with `.tcvy` manifests
 
 2. **Resource Management**
-    * Define stable loot in `.shard`
-    * Map temporal flows in `.tflow`
-    * Track stability in `.anchor`
+    * Define stable loot in `.shdcvy`
+    * Map temporal flows in `.tcvy`
+    * Track stability in `.ancvy`
 
 3. **Development Strategy**
     * Maintain clear file types
@@ -120,14 +120,14 @@ The `.tflow` extension describes a program's intended interaction with time, map
 ### For Rebel Development
 
 1. **File Organization**
-    * Use `.weave` for source files
-    * Target `.flux` for compilation
-    * Document with `.tflow` manifests
+    * Use `.cvy` for source files
+    * Target `.flxcvy` for compilation
+    * Document with `.tcvy` manifests
 
 2. **Resource Management**
-    * Define dynamic loot in `.infuse`
-    * Map temporal flows in `.tflow`
-    * Track flux states in `.flux`
+    * Define dynamic loot in `.infcvy`
+    * Map temporal flows in `.tcvy`
+    * Track flux states in `.flxcvy`
 
 3. **Development Strategy**
     * Embrace file diversity

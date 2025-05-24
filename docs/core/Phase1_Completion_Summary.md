@@ -17,19 +17,17 @@ The Manifesto now serves as the definitive philosophical statement of Chronovyan
 
 ### 2. The Great Duality Framework
 
-A dedicated exploration of [The Great Duality: Order and Flux](./The%20Great%20Duality%20-%20Order%20and%20Flux.md) has been developed, which:
+A dedicated exploration of The Great Duality: Order and Flux has been developed, which:
 
 - Analyzes the philosophical foundations of both Order (Conformity) and Flux (Rebellion)
-- Demonstrates how these principles manifest in code through specific language constructs
-- Explores the virtues and shadows of each approach
-- Provides practical techniques for finding balance between these opposing forces
-- Introduces the concept of a "Middle Path" that transcends the binary opposition
+- Explores the implications of each path for code structure and programming style
+- Introduces the idea of "The Middle Path" as a synthesis of the two approaches
 
 This document provides Weavers with a deeper understanding of the fundamental duality that underlies all temporal programming in Chronovyan.
 
 ### 3. Programming as Temporal Weaving
 
-The narrative of [Programming as Temporal Weaving](./Programming%20as%20Temporal%20Weaving.md) has been fully developed, transforming the understanding of what programming means in the Chronovyan context:
+The narrative of Programming as Temporal Weaving has been fully developed, transforming the understanding of what programming means in the Chronovyan context:
 
 - Establishes the tapestry metaphor, visualizing code as threads in a multidimensional fabric
 - Explores programming as a state of mindful presence and flow that directly influences the quality of the code
@@ -54,6 +52,29 @@ Through these documents, several key philosophical concepts have been firmly est
 5. **Paradox Management**: The necessity of recognizing, preventing, and resolving temporal inconsistencies to maintain system integrity
 
 6. **The Middle Path**: The potential for transcending binary opposition through the conscious integration of Order and Flux principles
+
+## Core Philosophical Documents
+
+The foundation of the Chronovyan worldview is established in two key documents:
+
+- The Great Duality - Order and Flux
+- Programming as Temporal Weaving
+
+## Key Documents Created in Phase 1
+
+1. **The Chronovyan Manifesto**
+   - Expanded with new sections on temporal weaving practice and reality creation
+   - Enhanced philosophical foundation for the language
+
+2. **The Great Duality: Order and Flux**
+   - Full Document: The Great Duality - Order and Flux
+   - Explores the fundamental tension between Conformity and Rebellion
+   - Establishes the philosophical foundation for variable modifiers
+
+3. **Programming as Temporal Weaving**
+   - Full Document: Programming as Temporal Weaving
+   - Develops the narrative of code as reality manipulation
+   - Establishes the role of the programmer as a "Temporal Weaver"
 
 ## Next Steps: Phase 2
 

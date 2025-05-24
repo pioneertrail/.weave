@@ -202,7 +202,7 @@ CONF_MODEL stability_guardian {
                 event.stability >= stability_rewards.stability_threshold) {
                 
                 // Grant rewards
-                resource_pools.chronon += stability_rewards.rewards.chronon;
+                resource_poolson += stability_rewards.rewards.chronon;
                 resource_pools.aethel += stability_rewards.rewards.aethel;
                 
                 emit ResourceRewardGranted {
@@ -302,7 +302,7 @@ CONF_MODEL stability_guardian {
         on ResourceConversionRequested: {
             if (event.conversion_type == "chronon_to_aethel") {
                 // Check if we have enough resources
-                if (resource_pools.chronon >= RESOURCE_CONVERSION.chronon_to_aethel.cost.chronon) {
+                if (resource_poolson >= RESOURCE_CONVERSION.chronon_to_aethel.cost.chronon) {
                     // Perform conversion
                     conversion_amount = min(
                         event.amount,
@@ -366,7 +366,7 @@ CONF_SCOPE {
                     target_model = find_conf_model(event.model_id);
                     if (target_model) {
                         if (event.resource_type == "chronon") {
-                            target_model.resource_pools.chronon += event.amount;
+                            target_model.resource_poolson += event.amount;
                         } else if (event.resource_type == "aethel") {
                             target_model.resource_pools.aethel += event.amount;
                         }
@@ -417,7 +417,7 @@ MODEL_EVENT_HANDLERS {
         if (event.type == "system_wide") {
             // Apply surge effects to all models
             for (model in active_models) {
-                model.resource_regeneration.chronon.base_rate *= 
+                model.resource_regenerationon.base_rate *= 
                     RECHARGE_EVENTS.chronon_surge.effect.chronon_regeneration;
                 model.resource_regeneration.aethel.base_rate *= 
                     RECHARGE_EVENTS.chronon_surge.effect.aethel_regeneration;
@@ -473,7 +473,7 @@ CONF_MODEL stability_guardian {
     
     event_handlers: {
         on ResourceLevelUpdate: {
-            if (resource_pools.chronon <= RESOURCE_DEPLETION.conf_models.critical_threshold.chronon) {
+            if (resource_poolson <= RESOURCE_DEPLETION.conf_models.critical_threshold.chronon) {
                 // Activate emergency recovery
                 activate_emergency_recovery({
                     priority: RESOURCE_DEPLETION.conf_models.recovery_priority;

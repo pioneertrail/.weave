@@ -54,14 +54,14 @@
   - **Parser**: Turns tokens into an Abstract Syntax Tree (AST)
   - **Evaluator/Executor**: Walks the AST to execute Chronovyan code
 - [x] **Build AST Node Classes**: Define classes for each Chronovyan construct
-- [x] **REPL or Batch Runner**: Create tools to run `.chronovyan` files or accept code interactively
+- [x] **REPL or Batch Runner**: Create tools to run `.cvy` files or accept code interactively
 
 ### 3.2 Core Interpreter Implementation
 - [x] **Implement the Lexer**: Recognize keywords, identifiers, symbols, literals, and comments
 - [x] **Implement the Parser**: Parse variable declarations, assignments, expressions, and control structures
 - [x] **Implement the Evaluator**: Start with variable storage and simple arithmetic, add execution for loops and conditionals
 - [x] **Resource Tracking**: Implement temporal resource tracking (Chronons, Aethel)
-- [ ] **Temporal Commands**: Add support for temporal commands with defined effects
+- [x] **Temporal Commands**: Add support for temporal commands with defined effects
 
 ### 3.3 Advanced Features
 - [ ] **Loot System**: Design loot types and properties, implement discovery mechanics
@@ -98,20 +98,20 @@
 ## Phase 5: Documentation, Testing & Examples
 
 ### 5.1 Core Documentation
-- [ ] Complete the Manifesto
-- [ ] Write language specification
+- [x] Complete the Manifesto
+- [x] Write language specification
 - [ ] Create API documentation
 - [ ] Develop best practices guide
 
 ### 5.2 Testing Infrastructure
-- [ ] Build a Test Suite: Automated tests for syntax, execution, and error conditions
+- [x] Build a Test Suite: Automated tests for syntax, execution, and error conditions
 - [ ] Create verification tools for temporal mechanics
 - [ ] Implement paradox detection tests
 - [ ] Design stability testing framework
 
 ### 5.3 Example Programs
-- [ ] Create Conformist examples
-- [ ] Develop Rebel demonstrations
+- [x] Create Conformist examples
+- [x] Develop Rebel demonstrations
 - [ ] Build hybrid applications
 - [ ] Document real-world use cases
 

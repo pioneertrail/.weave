@@ -361,7 +361,7 @@ temporal_program {
                 type: timeline;
                 body: {
                     track: metrics;
-                    if (metrics.weave_stability < 0.8) {
+                    if (metrics_stability < 0.8) {
                         adjust: {
                             type: timeline;
                             patterns: weave_patterns;
@@ -436,7 +436,7 @@ temporal_program {
                 type: timeline;
                 body: {
                     track: metrics;
-                    if (metrics.anchor_stability < 0.8) {
+                    if (metrics_stability < 0.8) {
                         reinforce: {
                             type: timeline;
                             anchors: anchor_points;

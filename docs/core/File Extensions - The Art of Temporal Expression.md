@@ -7,56 +7,56 @@ Chronovyan uses a unique set of file extensions to represent different aspects o
 
 ### 1. Source Files
 ```chronovyan
-// .chron - Main source files
-program.chron
+// .cvy - Main source files
+program.cvy
 
-// .tchron - Temporal module files
-temporal_module.tchron
+// .tcvy - Temporal module files
+temporal_module.tcvy
 
-// .qchron - Quantum module files
-quantum_module.qchron
+// .qcvy - Quantum module files
+quantum_module.qcvy
 ```
 
 ### 2. Configuration Files
 ```chronovyan
-// .chronfig - Project configuration
-project.chronfig
+// .cvyconfig - Project configuration
+project.cvyconfig
 
-// .tconfig - Temporal configuration
-temporal.tconfig
+// .tcvyconfig - Temporal configuration
+temporal.tcvyconfig
 
-// .rconfig - Resource configuration
-resources.rconfig
+// .rcvyconfig - Resource configuration
+resources.rcvyconfig
 ```
 
 ### 3. Documentation Files
 ```chronovyan
-// .chronmd - Documentation
-README.chronmd
+// .cvymd - Documentation
+README.cvymd
 
-// .tmd - Temporal documentation
-temporal_guide.tmd
+// .tcvymd - Temporal documentation
+temporal_guide.tcvymd
 
-// .qmd - Quantum documentation
-quantum_guide.qmd
+// .qcvymd - Quantum documentation
+quantum_guide.qcvymd
 ```
 
 ## File Types
 
 ### 1. Source Files
-- `.chron`: Main source files
-- `.tchron`: Temporal modules
-- `.qchron`: Quantum modules
+- `.cvy`: Main source files
+- `.tcvy`: Temporal modules
+- `.qcvy`: Quantum modules
 
 ### 2. Configuration Files
-- `.chronfig`: Project config
-- `.tconfig`: Temporal config
-- `.rconfig`: Resource config
+- `.cvyconfig`: Project config
+- `.tcvyconfig`: Temporal config
+- `.rcvyconfig`: Resource config
 
 ### 3. Documentation Files
-- `.chronmd`: Documentation
-- `.tmd`: Temporal docs
-- `.qmd`: Quantum docs
+- `.cvymd`: Documentation
+- `.tcvymd`: Temporal docs
+- `.qcvymd`: Quantum docs
 
 ## Advanced Features
 
@@ -64,19 +64,19 @@ quantum_guide.qmd
 ```chronovyan
 project_structure {
     source: {
-        main.chron;
-        temporal.tchron;
-        quantum.qchron;
+        main.cvy;
+        temporal.tcvy;
+        quantum.qcvy;
     }
     config: {
-        project.chronfig;
-        temporal.tconfig;
-        resources.rconfig;
+        project.cvyconfig;
+        temporal.tcvyconfig;
+        resources.rcvyconfig;
     }
     docs: {
-        README.chronmd;
-        temporal.tmd;
-        quantum.qmd;
+        README.cvymd;
+        temporal.tcvymd;
+        quantum.qcvymd;
     }
 }
 ```
@@ -122,14 +122,14 @@ documentation {
 ```chronovyan
 project {
     source: {
-        main.chron;
-        utils.chron;
+        main.cvy;
+        utils.cvy;
     }
     config: {
-        project.chronfig;
+        project.cvyconfig;
     }
     docs: {
-        README.chronmd;
+        README.cvymd;
     }
 }
 ```
@@ -138,12 +138,12 @@ project {
 ```chronovyan
 modules {
     temporal: {
-        core.tchron;
-        utils.tchron;
+        core.tcvy;
+        utils.tcvy;
     }
     quantum: {
-        core.qchron;
-        utils.qchron;
+        core.qcvy;
+        utils.qcvy;
     }
 }
 ```
@@ -152,11 +152,11 @@ modules {
 ```chronovyan
 documentation {
     guides: {
-        getting_started.chronmd;
-        advanced.chronmd;
+        getting_started.cvymd;
+        advanced.cvymd;
     }
     api: {
-        reference.chronmd;
+        reference.cvymd;
     }
 }
 ```
@@ -164,19 +164,19 @@ documentation {
 ## File Types
 
 ### 1. Source Files
-- `.chron`: Main source files
-- `.tchron`: Temporal modules
-- `.qchron`: Quantum modules
+- `.cvy`: Main source files
+- `.tcvy`: Temporal modules
+- `.qcvy`: Quantum modules
 
 ### 2. Configuration Files
-- `.chronfig`: Project config
-- `.tconfig`: Temporal config
-- `.rconfig`: Resource config
+- `.cvyconfig`: Project config
+- `.tcvyconfig`: Temporal config
+- `.rcvyconfig`: Resource config
 
 ### 3. Documentation Files
-- `.chronmd`: Documentation
-- `.tmd`: Temporal docs
-- `.qmd`: Quantum docs
+- `.cvymd`: Documentation
+- `.tcvymd`: Temporal docs
+- `.qcvymd`: Quantum docs
 
 ## Conclusion
 Chronovyan's file extensions provide a clear and organized way to manage different aspects of temporal programming. By understanding and properly using these extensions, developers can create more maintainable and well-organized projects. 

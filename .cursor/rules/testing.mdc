@@ -1,0 +1,28 @@
+---
+description: testing
+globs: 
+alwaysApply: false
+---
+Fantastic job on debugging and fixing the test!
+
+Let's continue our focus on the next test.
+
+Please:
+1.  **Analyze the Test :
+    
+2.  **Review Exception Handling in Code**:
+    
+
+3.  **Hypothesize and Propose Fix**:
+    
+
+4.  **Implement and Verify**:
+    * Implement your proposed fix.
+    * Provide the build command:
+        ```bash
+        cd ./build; cmake --build . --target
+    
+    * If the test passes, run the group of recently fixed tests suite to check for regressions:
+        ```bash
+        cd ./build; ./(tests_file).exe --gtest_filter=*
+        ```

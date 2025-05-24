@@ -59,6 +59,9 @@ All notable changes to this project will be documented in this file.
 - Improved error reporting for exceptional conditions
 - Updated timeout handling to properly detect and respond to sensor timeouts
 - Rewritten NaN detection in metric evaluation to be more reliable
+- **Changed file extension from `.cvy` to `.cvy`** for better compatibility and ease of use
+- Updated all documentation and code to reflect the new `.cvy` file extension
+- Added file extension validation in the interpreter to ensure proper handling of `.cvy` files
 
 ### Fixed
 
