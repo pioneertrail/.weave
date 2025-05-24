@@ -48,19 +48,19 @@
 ## Phase 3: Reference Implementation (Next Phase)
 
 ### 3.1 Interpreter Architecture
-- [ ] **Choose Implementation Language**: Select a host language for the interpreter (Python, C++, Rust, etc.)
-- [ ] **Design the Interpreter Structure**:
+- [x] **Choose Implementation Language**: Select a host language for the interpreter (Python, C++, Rust, etc.)
+- [x] **Design the Interpreter Structure**:
   - **Lexer**: Converts Chronovyan code into tokens
   - **Parser**: Turns tokens into an Abstract Syntax Tree (AST)
   - **Evaluator/Executor**: Walks the AST to execute Chronovyan code
-- [ ] **Build AST Node Classes**: Define classes for each Chronovyan construct
-- [ ] **REPL or Batch Runner**: Create tools to run `.chronovyan` files or accept code interactively
+- [x] **Build AST Node Classes**: Define classes for each Chronovyan construct
+- [x] **REPL or Batch Runner**: Create tools to run `.chronovyan` files or accept code interactively
 
 ### 3.2 Core Interpreter Implementation
-- [ ] **Implement the Lexer**: Recognize keywords, identifiers, symbols, literals, and comments
-- [ ] **Implement the Parser**: Parse variable declarations, assignments, expressions, and control structures
-- [ ] **Implement the Evaluator**: Start with variable storage and simple arithmetic, add execution for loops and conditionals
-- [ ] **Resource Tracking**: Implement temporal resource tracking (Chronons, Aethel)
+- [x] **Implement the Lexer**: Recognize keywords, identifiers, symbols, literals, and comments
+- [x] **Implement the Parser**: Parse variable declarations, assignments, expressions, and control structures
+- [x] **Implement the Evaluator**: Start with variable storage and simple arithmetic, add execution for loops and conditionals
+- [x] **Resource Tracking**: Implement temporal resource tracking (Chronons, Aethel)
 - [ ] **Temporal Commands**: Add support for temporal commands with defined effects
 
 ### 3.3 Advanced Features

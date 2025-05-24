@@ -31,6 +31,17 @@ All notable changes to this project will be documented in this file.
 - Improved metrics debugging to show more details in logs
 - New methods for handling partial sensor failures
 - Method to force the state controller to use a specific mode for testing
+- **Started Phase 3 of the Chronovyan Language Development Roadmap** - Reference Implementation
+- Implemented AST node classes for the Chronovyan language structure
+- Created Lexer implementation for tokenizing Chronovyan source code
+- Developed Parser implementation for generating Abstract Syntax Trees
+- Built Interpreter class for executing Chronovyan AST nodes
+- Implemented Temporal Runtime for handling time-related operations
+- Created Environment class for variable scoping and management
+- Implemented Value class with support for all Chronovyan data types
+- Built Error Handler system for robust error reporting
+- Added REPL (Read-Eval-Print Loop) interface for interactive code execution
+- Implemented resource tracking for Aethel and Chronons
 
 ### Changed
 - Refactored `ModeDecisionEngine::setForceModeForTesting()` to accept an optional reason parameter, decoupling test-specific logic
