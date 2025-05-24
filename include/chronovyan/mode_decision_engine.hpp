@@ -38,6 +38,7 @@ public:
         : last_decision_time_(std::chrono::system_clock::now()),
           force_mode_for_testing_(false),
           forced_mode_(PerformanceMode::Balanced),
+          forced_reason_("Mode forced for testing"),
           had_previous_source_failure_(false),
           cpu_was_unavailable_(false),
           memory_was_unavailable_(false),
@@ -65,10 +66,13 @@ public:
      *
      * @param mode The mode to force
      * @param enable Whether to enable forced mode
+     * @param reason The reason to use when forced mode is enabled
      */
-    void setForceModeForTesting(PerformanceMode mode, bool enable) {
+    void setForceModeForTesting(PerformanceMode mode, bool enable,
+                            const std::string& reason = "Mode forced for testing") {
         forced_mode_ = mode;
         force_mode_for_testing_ = enable;
+        forced_reason_ = reason;
     }
     
     /**
@@ -92,17 +96,23 @@ public:
     const ModeDecision& get_last_decision() const { return last_decision_; }
     
     /**
+     * @brief Gets the last metrics processed by the engine
+     * @return The last metrics processed
+     */
+    const SystemMetrics& getLastProcessedMetrics() const { return last_processed_metrics_; }
+    
+    /**
      * For testing purposes only - simulate source recovery for test
      * 
-     * @param cpu_was_unavailable Whether CPU source should be considered as previously unavailable
-     * @param memory_was_unavailable Whether memory source should be considered as previously unavailable
-     * @param gpu_was_unavailable Whether GPU source should be considered as previously unavailable
+     * @param had_previous_failure Whether any previous failure was detected
+     * @param cpu_failure Whether CPU source should be considered as previously unavailable
+     * @param memory_failure Whether memory source should be considered as previously unavailable
      */
-    void setSourceRecoveryTestingState(bool cpu_was_unavailable, bool memory_was_unavailable, bool gpu_was_unavailable) {
-        had_previous_source_failure_ = cpu_was_unavailable || memory_was_unavailable || gpu_was_unavailable;
-        cpu_was_unavailable_ = cpu_was_unavailable;
-        memory_was_unavailable_ = memory_was_unavailable;
-        gpu_was_unavailable_ = gpu_was_unavailable;
+    void setSourceRecoveryTestingState(bool had_previous_failure, bool cpu_failure, bool memory_failure) {
+        had_previous_source_failure_ = had_previous_failure;
+        cpu_was_unavailable_ = cpu_failure;
+        memory_was_unavailable_ = memory_failure;
+        gpu_was_unavailable_ = false;  // Always reset GPU for consistency
     }
 
 private:
@@ -120,6 +130,7 @@ private:
     // State
     ModeDecision last_decision_;
     std::chrono::system_clock::time_point last_decision_time_;
+    SystemMetrics last_processed_metrics_;  ///< The last metrics processed by the engine
     
     // Tracking for source recovery detection
     bool had_previous_source_failure_;      ///< Whether any source was unavailable before
@@ -130,6 +141,7 @@ private:
     // Testing hooks
     bool force_mode_for_testing_;
     PerformanceMode forced_mode_;
+    std::string forced_reason_;            ///< The reason to use when force_mode_for_testing_ is true
     static bool force_stable_for_testing_;
 };
 

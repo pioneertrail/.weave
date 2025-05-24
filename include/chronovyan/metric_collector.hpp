@@ -22,6 +22,11 @@ struct SystemMetrics {
     bool is_stale = false;
     bool is_valid = true;
     
+    // Exception tracking
+    bool has_exception = false;
+    std::string exception_source;
+    std::string exception_message;
+    
     // Legacy fields for compatibility with tests
     double cpu_usage = 0.0;
     double memory_usage = 0.0;
@@ -57,6 +62,10 @@ public:
     double get_memory_usage() const;
     double get_gpu_usage() const;
     
+    // Testing helper function to force metrics to never be stale
+    static void setForceRefreshForTesting(bool force_refresh);
+    static bool getForceRefreshForTesting();
+    
 private:
     // Helper methods
     double collect_metric(IMetricSource* source) const;
@@ -70,6 +79,12 @@ private:
     
     // Named sources for extensibility
     std::map<std::string, IMetricSource*> sources_;
+    
+    // Static member to force refresh for testing
+    static bool force_refresh_for_testing_;
+    
+    // Temporary storage for exception information
+    mutable std::string last_error_;
 };
 
 } // namespace chronovyan 

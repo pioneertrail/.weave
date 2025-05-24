@@ -19,7 +19,7 @@
 namespace chronovyan {
 namespace sync {
 
-// Forward declarations
+// Forward declarations for auxiliary classes
 class MLModel;
 class RealTimeOptimizer;
 class PatternRecognizer;
@@ -63,9 +63,17 @@ public:
     void synchronize_temporal_flows();
 
     // Public methods for testing
-    double get_overall_sync() const { return sync_metrics.overall_sync; }
-    double get_overall_stability() const { return sync_metrics.overall_stability; }
-    double get_overall_coherence() const { return sync_metrics.overall_coherence; }
+    double get_overall_sync() const { 
+        return sync_metrics.overall_sync; 
+    }
+    
+    double get_overall_stability() const { 
+        return sync_metrics.overall_stability; 
+    }
+    
+    double get_overall_coherence() const { 
+        return sync_metrics.overall_coherence; 
+    }
     
     // New synchronization features
     void set_sync_threshold(double threshold) { 
@@ -89,6 +97,21 @@ public:
         resize_histories();
     }
     
+    void set_recovery_timeout(std::chrono::milliseconds timeout) {
+        std::lock_guard<std::mutex> lock(sync_mutex);
+        recovery_timeout = timeout;
+    }
+    
+    void set_performance_tracking(bool enable) {
+        std::lock_guard<std::mutex> lock(sync_mutex);
+        enable_performance_tracking = enable;
+    }
+    
+    void set_auto_recovery(bool enable) {
+        std::lock_guard<std::mutex> lock(sync_mutex);
+        enable_auto_recovery = enable;
+    }
+    
     // Advanced configuration
     struct SyncConfig {
         double sync_threshold = 0.8;
@@ -100,16 +123,7 @@ public:
         std::chrono::milliseconds recovery_timeout{1000};
     };
     
-    void configure(const SyncConfig& config) {
-        std::lock_guard<std::mutex> lock(sync_mutex);
-        sync_threshold = std::clamp(config.sync_threshold, 0.0, 1.0);
-        stability_threshold = std::clamp(config.stability_threshold, 0.0, 1.0);
-        coherence_threshold = std::clamp(config.coherence_threshold, 0.0, 1.0);
-        set_history_size(config.history_size);
-        enable_auto_recovery = config.enable_auto_recovery;
-        enable_performance_tracking = config.enable_performance_tracking;
-        recovery_timeout = config.recovery_timeout;
-    }
+    void configure(const SyncConfig& config);
     
     // Advanced state management
     struct SyncState {
@@ -167,10 +181,7 @@ public:
         double coherence_level{0.0};
     };
     
-    void set_error_handler(std::function<void(const ErrorInfo&)> handler) {
-        std::lock_guard<std::mutex> lock(sync_mutex);
-        error_handler = std::move(handler);
-    }
+    void set_error_handler(std::function<void(const ErrorInfo&)> handler);
     
     // Advanced recovery strategies
     enum class RecoveryStrategy {
@@ -182,6 +193,15 @@ public:
     void set_recovery_strategy(RecoveryStrategy strategy) {
         std::lock_guard<std::mutex> lock(sync_mutex);
         recovery_strategy = strategy;
+        
+        // If setting to Custom but no custom strategy is set, initialize with a default one
+        if (strategy == RecoveryStrategy::Custom && !custom_recovery_strategy) {
+            custom_recovery_strategy = [this]() {
+                initialize_sync_points();
+                initialize_sync_patterns();
+                initialize_sync_metrics();
+            };
+        }
     }
     
     void set_custom_recovery_strategy(std::function<void()> strategy) {
@@ -191,18 +211,15 @@ public:
     
     // Advanced synchronization control
     void pause_synchronization() {
-        std::lock_guard<std::mutex> lock(sync_mutex);
-        is_synchronization_paused = true;
+        is_synchronization_paused.store(true, std::memory_order_relaxed);
     }
     
     void resume_synchronization() {
-        std::lock_guard<std::mutex> lock(sync_mutex);
-        is_synchronization_paused = false;
+        is_synchronization_paused.store(false, std::memory_order_relaxed);
     }
     
     bool is_paused() const {
-        std::lock_guard<std::mutex> lock(sync_mutex);
-        return is_synchronization_paused;
+        return is_synchronization_paused.load(std::memory_order_relaxed);
     }
     
     // Advanced monitoring
@@ -434,6 +451,9 @@ private:
     std::function<void()> custom_recovery_strategy;
     std::function<void(double)> sync_callback;
     std::function<void(const std::exception&)> error_callback;
+    
+    // Flag to indicate a forced error state
+    bool forced_error_state{false};
     
     // Pattern analysis
     struct PatternHistory {

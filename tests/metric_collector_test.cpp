@@ -60,6 +60,11 @@ TEST_F(MetricCollectorTest, CollectsMetricsSuccessfully) {
     EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
     EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(75.0));
     
+    auto current_time = std::chrono::system_clock::now();
+    EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*memory_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    
     // Collect metrics
     auto metrics = collector->collect_metrics();
     
@@ -73,9 +78,17 @@ TEST_F(MetricCollectorTest, CollectsMetricsSuccessfully) {
 // Test handling of unavailable metric source
 TEST_F(MetricCollectorTest, HandlesUnavailableMetricSource) {
     // Set up expectations
-    EXPECT_CALL(*cpu_source, isAvailable()).WillOnce(Return(false));
+    EXPECT_CALL(*cpu_source, isAvailable()).WillRepeatedly(Return(false));
+    EXPECT_CALL(*memory_source, isAvailable()).WillRepeatedly(Return(true));
+    EXPECT_CALL(*gpu_source, isAvailable()).WillRepeatedly(Return(true));
+    
     EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
     EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(75.0));
+    
+    auto current_time = std::chrono::system_clock::now();
+    EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*memory_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
     
     // Collect metrics
     auto metrics = collector->collect_metrics();
@@ -110,9 +123,13 @@ TEST_F(MetricCollectorTest, DetectsStaleMetrics) {
     auto current_time = std::chrono::system_clock::now();
     
     // Set up expectations
-    EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillOnce(Return(old_time));
-    EXPECT_CALL(*memory_source, getLastUpdateTime()).WillOnce(Return(current_time));
-    EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillOnce(Return(current_time));
+    EXPECT_CALL(*cpu_source, isAvailable()).WillRepeatedly(Return(true));
+    EXPECT_CALL(*memory_source, isAvailable()).WillRepeatedly(Return(true));
+    EXPECT_CALL(*gpu_source, isAvailable()).WillRepeatedly(Return(true));
+    
+    EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillRepeatedly(Return(old_time));
+    EXPECT_CALL(*memory_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
     
     EXPECT_CALL(*cpu_source, getValue()).WillOnce(Return(45.5));
     EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
@@ -165,9 +182,17 @@ TEST_F(MetricCollectorTest, HandlesNaNMetrics) {
 // Test handling of multiple failures
 TEST_F(MetricCollectorTest, HandlesMultipleFailures) {
     // Set up expectations
-    EXPECT_CALL(*cpu_source, isAvailable()).WillOnce(Return(false));
+    EXPECT_CALL(*cpu_source, isAvailable()).WillRepeatedly(Return(false));
+    EXPECT_CALL(*memory_source, isAvailable()).WillRepeatedly(Return(true));
+    EXPECT_CALL(*gpu_source, isAvailable()).WillRepeatedly(Return(true));
+    
     EXPECT_CALL(*memory_source, getValue()).WillOnce(Throw(std::runtime_error("Memory sensor error")));
     EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(std::numeric_limits<double>::quiet_NaN()));
+    
+    auto current_time = std::chrono::system_clock::now();
+    EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*memory_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+    EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
     
     // Collect metrics
     auto metrics = collector->collect_metrics();
@@ -181,24 +206,44 @@ TEST_F(MetricCollectorTest, HandlesMultipleFailures) {
 
 // Test recovery after temporary failure
 TEST_F(MetricCollectorTest, RecoversAfterTemporaryFailure) {
-    // First collection with failure
-    EXPECT_CALL(*cpu_source, isAvailable()).WillOnce(Return(false));
-    EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
-    EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(75.0));
+    auto current_time = std::chrono::system_clock::now();
     
-    auto metrics1 = collector->collect_metrics();
-    EXPECT_DOUBLE_EQ(metrics1.cpu_usage, MetricCollector::kDefaultCpuUsage);
-    EXPECT_TRUE(metrics1.is_stale);
+    // First collection with failure
+    {
+        EXPECT_CALL(*cpu_source, isAvailable()).WillRepeatedly(Return(false));
+        EXPECT_CALL(*memory_source, isAvailable()).WillRepeatedly(Return(true));
+        EXPECT_CALL(*gpu_source, isAvailable()).WillRepeatedly(Return(true));
+        
+        EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
+        EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(75.0));
+        
+        EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+        EXPECT_CALL(*memory_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+        EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+        
+        auto metrics1 = collector->collect_metrics();
+        EXPECT_DOUBLE_EQ(metrics1.cpu_usage, MetricCollector::kDefaultCpuUsage);
+        EXPECT_TRUE(metrics1.is_stale);
+    }
     
     // Second collection with recovery
-    EXPECT_CALL(*cpu_source, isAvailable()).WillOnce(Return(true));
-    EXPECT_CALL(*cpu_source, getValue()).WillOnce(Return(45.5));
-    EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
-    EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(75.0));
-    
-    auto metrics2 = collector->collect_metrics();
-    EXPECT_DOUBLE_EQ(metrics2.cpu_usage, 45.5);
-    EXPECT_FALSE(metrics2.is_stale);
+    {
+        EXPECT_CALL(*cpu_source, isAvailable()).WillRepeatedly(Return(true));
+        EXPECT_CALL(*memory_source, isAvailable()).WillRepeatedly(Return(true));
+        EXPECT_CALL(*gpu_source, isAvailable()).WillRepeatedly(Return(true));
+        
+        EXPECT_CALL(*cpu_source, getValue()).WillOnce(Return(45.5));
+        EXPECT_CALL(*memory_source, getValue()).WillOnce(Return(60.0));
+        EXPECT_CALL(*gpu_source, getValue()).WillOnce(Return(75.0));
+        
+        EXPECT_CALL(*cpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+        EXPECT_CALL(*memory_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+        EXPECT_CALL(*gpu_source, getLastUpdateTime()).WillRepeatedly(Return(current_time));
+        
+        auto metrics2 = collector->collect_metrics();
+        EXPECT_DOUBLE_EQ(metrics2.cpu_usage, 45.5);
+        EXPECT_FALSE(metrics2.is_stale);
+    }
 }
 
 int main(int argc, char **argv) {

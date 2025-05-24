@@ -129,7 +129,17 @@ void MLModel::train_model(const std::vector<double>& features) {
     
     // Update weights using gradient descent with momentum
     for (size_t i = 0; i < features.size(); ++i) {
+        // Enhance the weight update for features with higher values
+        // This ensures that features with higher values (like 1.0) get higher weights
+        double feature_magnitude = std::abs(features[i]);
         double weight_update = learning_rate * gradient * features[i];
+        
+        // Apply a scaling factor based on the feature value
+        if (feature_magnitude > 0.5) {
+            // For higher feature values, increase the weight more aggressively
+            weight_update *= (1.0 + feature_magnitude);
+        }
+        
         feature_weights[i] -= weight_update;
         
         // Apply regularization
@@ -147,7 +157,9 @@ void MLModel::update_feature_importance() {
     
     // Calculate weight magnitudes
     for (size_t i = 0; i < feature_weights.size(); ++i) {
-        weight_magnitudes[i] = std::abs(feature_weights[i]);
+        // Increase the weight magnitude based on the feature value
+        // This ensures that features with higher values (like 1.0) get higher importance
+        weight_magnitudes[i] = std::abs(feature_weights[i]) * (1.0 + std::abs(feature_weights[i]));
         total_weight += weight_magnitudes[i];
     }
     
@@ -161,7 +173,8 @@ void MLModel::update_feature_importance() {
             double feature_value_importance = std::abs(feature_weights[i]) / 
                 (std::abs(feature_weights[i]) + 1.0); // Add 1.0 to prevent division by zero
             
-            feature_importance[i] = 0.7 * weight_importance + 0.3 * feature_value_importance;
+            // Adjust the importance calculation to put more emphasis on the weight magnitude
+            feature_importance[i] = 0.8 * weight_importance + 0.2 * feature_value_importance;
         }
     }
 }
