@@ -1,0 +1,85 @@
+// examples/rule110_simulation.cvy
+// Demonstrates Rule 110 cellular automaton with Chronovyan temporal concepts.
+
+ANTECEDENCE {
+    DECLARE CONF::STATIC World_Width : INT = 60;
+    DECLARE CONF::STATIC Generations_To_Simulate : INT = 30;
+    
+    // Initial state: a single '1' in the middle for Rule 110 typically
+    DECLARE CONF::ANCHOR Initial_Generation_Pattern : CONF_ARRAY = create_temporal_array(World_Width);
+    // ... (code here to initialize Initial_Generation_Pattern, e.g., all 0s with one 1) ...
+    // For simplicity, assuming it's pre-populated or a helper function sets it.
+    // Initial_Generation_Pattern[World_Width / 2] = 1; 
+
+
+    DECLARE REB::ECHO Simulation_History : ARRAY<CONF_ARRAY>; // Stores each generation
+    DECLARE CONF Current_Generation : CONF_ARRAY = Initial_Generation_Pattern;
+    
+    // Define Rule 110 as a WEAVE_PATTERN for clarity and potential reuse/modification
+    DECLARE CONF::STATIC Rule110_Logic : WEAVE_PATTERN = define_pattern("ApplyRule110", [
+        // Parameters: left_cell, current_cell, right_cell
+        // Returns: new_current_cell_state (0 or 1)
+        // Logic for Rule 110: new_state = (current + right + current*right + left*current*right) % 2
+        // This would be implemented using Chronoscript expressions.
+        // For brevity, the exact detailed statements are abstracted.
+        DECLARE CONF L, C, R : INT; // Input params
+        DECLARE CONF New_State : INT;
+        // ... Rule 110 calculation ...
+        RETURN New_State;
+    ]);
+}
+
+CONCURRENCY {
+    PRINT("Starting Rule 110 Simulation...");
+    SNAPSHOT(Current_Generation @EpochStart); // Initial snapshot
+    Simulation_History.push(Current_Generation);
+
+    CYCLE FOR Gen_Count FROM 1 TO Generations_To_Simulate {
+        DECLARE CONF Next_Generation : CONF_ARRAY = create_temporal_array(World_Width);
+        
+        // Calculate next generation using the Rule110_Logic pattern
+        // This loop could be parallelized for performance in a more complex weave
+        CYCLE FOR Cell_Index FROM 0 TO World_Width - 1 {
+            DECLARE CONF Left_Neighbor : INT = Cell_Index == 0 ? Current_Generation[World_Width-1] : Current_Generation[Cell_Index-1]; // Wrap-around
+            DECLARE CONF Center_Cell : INT = Current_Generation[Cell_Index];
+            DECLARE CONF Right_Neighbor : INT = Cell_Index == World_Width-1 ? Current_Generation[0] : Current_Generation[Cell_Index+1]; // Wrap-around
+            
+            Next_Generation[Cell_Index] = apply_pattern(Rule110_Logic, [Left_Neighbor, Center_Cell, Right_Neighbor]);
+        }
+        
+        Current_Generation = Next_Generation;
+        Simulation_History.push(Current_Generation); // Store this generation's state
+        
+        // Outputting the generation (conceptual print function for arrays)
+        PRINT("Generation " + Gen_Count + ": " + Current_Generation.toString()); // Assuming a .toString() for arrays
+
+        // --- Potential Rebel Intervention ---
+        // IF (Gen_Count % 10 == 0) {
+        //     PRINT("Rebel Weaver attempts to influence pattern at Gen: " + Gen_Count);
+        //     // This could involve:
+        //     // 1. Using Aethel to REWIND_FLOW a few generations and inject a new pattern.
+        //     // 2. BRANCH_TIMELINE to see alternate evolutions from this point.
+        //     // 3. INFUSE a 'glitch' loot into Current_Generation before next calculation.
+        //     // These actions would have Aethel costs and affect PARADOX_LEVEL.
+        //     // Example:
+        //     // DECLARE REB::FLUX Random_Cell_Flip : INT = floor(random() * World_Width);
+        //     // Current_Generation[Random_Cell_Flip] = 1 - Current_Generation[Random_Cell_Flip]; // Flip a bit
+        //     // AETHEL_RESERVE -= 10; PARADOX_LEVEL += 0.05; 
+        // }
+    }
+}
+
+CONSEQUENCE {
+    PRINT("Rule 110 Simulation Complete.");
+    PRINT("Total Generations Simulated: " + Generations_To_Simulate);
+    PRINT("Final PARADOX_LEVEL: " + PARADOX_LEVEL);
+    
+    // A Seeker might analyze Simulation_History for emergent patterns or anomalies.
+    // An Anchor would verify the integrity of the Simulation_History.
+    DECLARE CONF Final_Pattern_Complexity : FLOAT = calculate_complexity(Simulation_History.last());
+    IF Final_Pattern_Complexity > 0.8 { // Assuming some complexity metric
+        LOOT_TABLE { 0.3: LOOT("Pattern_of_Emergence"); }
+    }
+    
+    DEJAVU(Simulation_History, PARADOX_LEVEL, "Rule110 Weave Audit");
+} 

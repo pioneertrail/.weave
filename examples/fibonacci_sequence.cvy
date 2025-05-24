@@ -1,0 +1,86 @@
+// examples/fibonacci_sequence.cvy
+// Demonstrates Fibonacci calculation with Conformist and Rebel elements.
+
+ANTECEDENCE {
+    // Define a stable function (WEAVE_PATTERN) for conformist Fibonacci
+    DECLARE CONF::STATIC Fibonacci_Conformist : WEAVE_PATTERN = define_pattern("Fibonacci_Stable", [
+        // Parameters: n (INT)
+        // Returns: INT
+        // This pattern would contain the iterative or recursive logic
+        // for standard Fibonacci calculation.
+        // For brevity, actual logic is abstracted here.
+        // It would primarily use CONF variables and standard loops.
+        // AETHEL_COST: 0 (or generates a tiny amount)
+        // INSTABILITY_INDEX: 0.01 (very low)
+        DECLARE CONF N_Input : INT; // Placeholder for input parameter
+        DECLARE CONF Result : INT;  // Placeholder for return value
+        // ... actual fibonacci logic using N_Input, storing in Result ...
+        RETURN Result; 
+    ]);
+
+    DECLARE CONF Max_Fib_Number : INT = 10;
+    DECLARE CONF Result_Conformist : INT;
+
+    // For our Rebel approach - an array to store sequence for potential rewind
+    DECLARE REB::ECHO Fibonacci_History : CONF_ARRAY; 
+}
+
+CONCURRENCY {
+    // --- Conformist Path ---
+    || Conformist_Execution: {
+        PRINT("Calculating Fibonacci(" + Max_Fib_Number + ") via Conformist Path...");
+        Result_Conformist = apply_pattern(Fibonacci_Conformist, [Max_Fib_Number]); // Pass Max_Fib_Number
+        PRINT("Conformist Result: " + Result_Conformist);
+        // This execution would consume predictable Chronons and maintain low PARADOX_LEVEL
+    }
+
+    // --- Rebel Path (Conceptual Snippet - Verification or Alternative) ---
+    || Rebel_Verification: {
+        // A more complex REB weave might calculate Fibonacci by building a history
+        // and then using REWIND_FLOW or temporal echoes for verification or unique calculations.
+        // This would consume Aethel and raise PARADOX_LEVEL.
+        
+        DECLARE REB::FLUX Current_Fib : INT = 0;
+        DECLARE REB::FLUX Next_Fib : INT = 1;
+        DECLARE REB::FLUX Temp_Store : INT;
+        
+        PRINT("Rebel Path: Building Fibonacci sequence with history for potential temporal ops...");
+        Fibonacci_History = create_temporal_array(Max_Fib_Number + 1); // Store up to F(n)
+        
+        CYCLE FOR Iter FROM 0 TO Max_Fib_Number {
+            Fibonacci_History[Iter] = Current_Fib; // Store in echo-capable array
+
+            // Standard Fibonacci iteration
+            Temp_Store = Current_Fib + Next_Fib;
+            Current_Fib = Next_Fib;
+            Next_Fib = Temp_Store;
+            
+            // Imagine a REB command here that verifies by peeking at Fibonacci_History[Iter-2]
+            // or even attempts a speculative REWIND if a glitch is detected.
+            // e.g., IF (Current_Fib < Fibonacci_History[Iter-1] && Iter > 1) {
+            //     INVOKE REWIND_FLOW(target: SELF_LOOP_ID, steps: 1, cost: AETHEL_MEDIUM);
+            //     // Recalibrate or log paradox
+            // }
+        }
+        PRINT("Rebel Path Result (from history): " + Fibonacci_History[Max_Fib_Number]);
+        // This path has higher Aethel cost and instability potential.
+    }
+}
+
+CONSEQUENCE {
+    ?! paradox_check([Result_Conformist, Fibonacci_History]); // Check for divergence if necessary
+    
+    DEJAVU(System_State, PARADOX_LEVEL, "Fibonacci Weave Audit");
+    
+    IF Result_Conformist == Fibonacci_History[Max_Fib_Number] {
+        PRINT("Conformist and Rebel paths align for Fibonacci(" + Max_Fib_Number + ").");
+        LOOT_TABLE { 0.1: LOOT("Shard_of_Perfect_Sequence"); } // Small chance for loot on harmony
+    } ELSE {
+        PRINT("Divergence detected or Rebel path incomplete for full comparison.");
+        CATCH_TEMPORAL PotentialDivergenceError {
+            NOTIFY_ANCHOR_CASTE("Fibonacci sequence divergence noted.");
+        }
+    }
+    PRINT("Final PARADOX_LEVEL: " + PARADOX_LEVEL);
+    PRINT("AETHEL_RESERVE remaining: " + AETHEL_RESERVE);
+} 
