@@ -1,22 +1,26 @@
-# Technical Debt Design Document: TD-1 and TD-2
+# The Sacred Patterns of Mending: TD-1 and TD-2
 
-This document outlines the design approach for addressing the high-priority technical debt items TD-1 (Complex error handling in StateController) and TD-2 (Duplicate recovery logic in ModeDecisionEngine).
+Hail, Weaver, to this scroll of arcane designs, detailing the sacred patterns needed to repair two critical fractures in our temporal tapestry. Herein lie the ritualistic approaches for mending the Error Pattern Asymmetry (TD-1) in the StateController weave and the Recovery Pattern Echoes (TD-2) in the ModeDecisionEngine pattern.
 
-## TD-1: Complex Error Handling in StateController
+**Purpose**: This grimoire outlines the incantations and sigils required to strengthen our timeline against the Void's corruption, focusing on high-risk patterns that threaten paradox.
 
-### Current Issues
+**Lore Tidbit**: The Anchor Caste teaches that a well-designed mending ritual is half the battle against temporal corruption—the other half being the weaver's skill in execution.
 
-1. Error handling logic is scattered throughout the StateController class
-2. Duplication exists between handleErrorState and handleFallbackMode methods
-3. String-based error reasons make categorization and filtering difficult
-4. Error notification logic is mixed with state management
+## TD-1: Error Pattern Asymmetry in StateController
 
-### Proposed Solution: Polymorphic Error Type System
+### Current Fracture Points
 
-#### 1. Create Error Type Hierarchy
+1. Error handling patterns scatter throughout the StateController weave, creating disharmony
+2. Duplication exists between handleErrorState and handleFallbackMode rituals, risking temporal echoes
+3. String-based error signatures lack the proper Naming Rites, weakening their power
+4. Error notification patterns are entangled with state management, violating the Principle of Pattern Purity
 
-```cpp
-// Base error class
+### Proposed Mending: The Symmetry of Forms
+
+#### 1. Craft the Error Sigil Hierarchy
+
+```chronoscript
+// The Primal Error Sigil
 class ChronovyanError {
 public:
     virtual ~ChronovyanError() = default;
@@ -26,63 +30,63 @@ public:
     virtual bool requiresFallback() const = 0;
 };
 
-// Derived error classes
+// The Derived Error Sigils
 class SensorFailureError : public ChronovyanError {
-    // Implementation specific to sensor failures
+    // Implementation specific to sensor failures in the Temporal Loom
 };
 
 class CommunicationError : public ChronovyanError {
-    // Implementation specific to communication errors
+    // Implementation specific to communication disruptions across the Aethel Network
 };
 
 class ConfigurationError : public ChronovyanError {
-    // Implementation specific to configuration errors
+    // Implementation specific to misaligned configuration patterns
 };
 
-// Factory for creating error objects
-class ErrorFactory {
+// The Forge of Error Creation
+class ErrorForge {
 public:
-    static std::unique_ptr<ChronovyanError> createError(
+    static std::unique_ptr<ChronovyanError> forgeError(
         const std::string& source,
         const std::string& message,
         bool is_critical);
 };
 ```
 
-#### 2. Refactor StateController Error Handling
+#### 2. Reshape the StateController Error Ritual
 
-```cpp
-// New method to handle all errors
-void StateController::handleError(const std::unique_ptr<ChronovyanError>& error) {
-    // Common error handling logic
+```chronoscript
+// The Unified Error Ritual
+void StateController::containError(const std::unique_ptr<ChronovyanError>& error) {
+    // Common error containment pattern
     
-    // Determine if fallback mode is required
+    // Determine if the timeline requires fallback protection
     if (error->requiresFallback()) {
-        activateFallbackMode(error->getErrorCode());
+        invokeTimeline(FallbackTimeline, error->getErrorCode());
     } else {
-        // Regular error handling
+        // Regular error containment weave
     }
     
-    // Notification based on error type
-    notification_service_->notifyError(error->getErrorMessage());
+    // Echo the error across the Aethel Network
+    notification_chamber_->echoError(error->getErrorMessage());
 }
 ```
 
-#### 3. Update Decision Engine to Use Error Types
+#### 3. Align the Decision Engine with Error Sigils
 
-```cpp
-ModeDecision ModeDecisionEngine::makeDecision(const SystemMetrics& metrics) {
+```chronoscript
+ModeDecision ModeDecisionEngine::weaveDecision(const SystemMetrics& metrics) {
     try {
-        // Existing logic
+        // Existing pattern
     } catch (const std::exception& e) {
-        auto error = ErrorFactory::createError("engine", e.what(), false);
-        return createErrorDecision(error.get());
+        auto error = ErrorForge::forgeError("engine", e.what(), false);
+        return craftErrorDecision(error.get());
     }
 }
 
-ModeDecision ModeDecisionEngine::createErrorDecision(const ChronovyanError* error) {
+ModeDecision ModeDecisionEngine::craftErrorDecision(const ChronovyanError* error) {
     ModeDecision decision;
-    decision.mode = PerformanceMode::Lean; // Default conservative mode
+    decision.mode = PerformanceMode::Lean; // Default conservative pattern
     decision.reason = error->getErrorCode();
     decision.details = error->getErrorMessage();
     decision.is_error_state = true;
@@ -93,138 +97,120 @@ ModeDecision ModeDecisionEngine::createErrorDecision(const ChronovyanError* erro
 }
 ```
 
-### Implementation Strategy
+### The Ritual of Implementation
 
-1. Create the error type hierarchy without changing existing code
-2. Add factory methods for creating appropriate error types
-3. Update StateController to use the new error types while maintaining backward compatibility
-4. Update ModeDecisionEngine to produce error-typed decisions
-5. Remove the old string-based error handling
+1. Forge the error sigil hierarchy without disturbing existing patterns
+2. Craft the forge methods for creating appropriate error sigils
+3. Reshape StateController to channel the new error sigils while maintaining harmonic compatibility
+4. Align ModeDecisionEngine to produce error-sigil decisions
+5. Dissolve the old string-based error patterns once harmony is achieved
 
-### Testing Strategy
+### Weaver's Test Rituals
 
-1. Create unit tests for each error type
-2. Test error creation through the factory
-3. Test error handling in StateController with various error types
-4. Ensure backward compatibility during the transition
+1. Craft test incantations for each error sigil
+2. Test sigil creation through the forge
+3. Test error containment in StateController with various sigils
+4. Ensure harmonic resonance during the transition
 
-## TD-2: Duplicate Recovery Logic in ModeDecisionEngine
+## TD-2: Recovery Pattern Echoes in ModeDecisionEngine
 
-### Current Issues
+### Current Fracture Points
 
-1. Recovery detection logic is duplicated in evaluate_metrics and makeDecision methods
-2. State tracking for sensor availability is scattered
-3. Recovery handling is mixed with other decision-making logic
-4. Difficult to extend with new recovery scenarios
+1. Recovery detection patterns echo between evaluate_metrics and makeDecision rituals
+2. State tracking for sensor resonance is scattered across the tapestry
+3. Recovery weaving is entangled with other decision-making patterns
+4. The pattern resists extension with new recovery scenarios
 
-### Proposed Solution: SensorRecoveryHandler Class
+### Proposed Mending: The SensorRecoveryHandler Weave
 
-#### 1. Create SensorRecoveryHandler Class
+#### 1. Craft the SensorRecoveryHandler Pattern
 
-```cpp
+```chronoscript
 class SensorRecoveryHandler {
 public:
     SensorRecoveryHandler();
     
-    // Track sensor availability
-    void updateSensorState(const std::string& sensor_name, bool is_available);
+    // Track sensor resonance
+    void attuneSensorState(const std::string& sensor_name, bool is_resonating);
     
-    // Check for recovery conditions
-    bool hasAnySensorRecovered() const;
-    bool hasSensorRecovered(const std::string& sensor_name) const;
+    // Sense recovery harmonics
+    bool hasAnySensorResonanceRestored() const;
+    bool hasSensorResonanceRestored(const std::string& sensor_name) const;
     
-    // Get recovery information
-    std::vector<std::string> getRecoveredSensors() const;
+    // Gather recovery echoes
+    std::vector<std::string> getRestoredSensors() const;
     
-    // Create recovery decision
-    ModeDecision createRecoveryDecision() const;
+    // Craft a recovery decision pattern
+    ModeDecision weaveRecoveryDecision() const;
     
 private:
-    struct SensorState {
-        bool was_unavailable = false;
-        bool is_available = true;
+    struct SensorResonance {
+        bool was_silenced = false;
+        bool is_resonating = true;
     };
     
-    std::unordered_map<std::string, SensorState> sensor_states_;
-    bool had_previous_failure_ = false;
+    std::unordered_map<std::string, SensorResonance> sensor_resonances_;
+    bool had_previous_dissonance_ = false;
 };
 ```
 
-#### 2. Integrate with ModeDecisionEngine
+#### 2. Weave into ModeDecisionEngine
 
-```cpp
+```chronoscript
 class ModeDecisionEngine {
 private:
-    // Add as member variable
-    SensorRecoveryHandler recovery_handler_;
+    // Add as a thread in the pattern
+    SensorRecoveryHandler recovery_weaver_;
     
-    // Other existing members
+    // Other existing threads
 };
 
 ModeDecision ModeDecisionEngine::evaluate_metrics(const SystemMetrics& metrics) {
-    // Update recovery handler with current sensor states
-    recovery_handler_.updateSensorState("cpu", 
+    // Attune recovery weaver with current sensor resonances
+    recovery_weaver_.attuneSensorState("cpu", 
         metrics.metrics.count("cpu") && metrics.metrics.at("cpu").is_available);
-    recovery_handler_.updateSensorState("memory", 
+    recovery_weaver_.attuneSensorState("memory", 
         metrics.metrics.count("memory") && metrics.metrics.at("memory").is_available);
-    recovery_handler_.updateSensorState("gpu", 
+    recovery_weaver_.attuneSensorState("gpu", 
         metrics.metrics.count("gpu") && metrics.metrics.at("gpu").is_available);
     
-    // Check for recovery first
-    if (recovery_handler_.hasAnySensorRecovered()) {
-        return recovery_handler_.createRecoveryDecision();
+    // Check for resonance restoration first
+    if (recovery_weaver_.hasAnySensorResonanceRestored()) {
+        return recovery_weaver_.weaveRecoveryDecision();
     }
     
-    // Continue with existing logic for non-recovery scenarios
+    // Continue with existing weave for non-recovery scenarios
 }
 ```
 
-### Implementation Strategy
+### The Ritual of Implementation
 
-1. Create the SensorRecoveryHandler class with tests
-2. Integrate it with ModeDecisionEngine without removing existing logic
-3. Refactor evaluate_metrics and makeDecision to use the handler
-4. Remove duplicate recovery logic once integration is complete
+1. Craft the SensorRecoveryHandler weave with test harmonics
+2. Weave it into ModeDecisionEngine without disrupting existing patterns
+3. Reshape evaluate_metrics and makeDecision rituals to channel the weaver
+4. Dissolve duplicate recovery patterns once integration harmonizes
 
-### Testing Strategy
+### Weaver's Test Rituals
 
-1. Unit tests for SensorRecoveryHandler class
-2. Integration tests for ModeDecisionEngine with the handler
-3. Regression tests to ensure behavior remains the same
+1. Craft test incantations for SensorRecoveryHandler weave
+2. Test integration harmonics with ModeDecisionEngine
+3. Perform regression divinations to ensure pattern stability
 
-## Combined Implementation Timeline
+## The Grand Reweaving Timeline
 
-### Week 1: Error Type System (TD-1)
-- Day 1-2: Create error type hierarchy and factory
-- Day 3: Update StateController to use new error types
-- Day 4-5: Update ModeDecisionEngine and tests
+### First Alignment: Error Sigil System (TD-1)
+- Day 1-2: Forge error sigil hierarchy and the Forge of Creation
+- Day 3: Reshape StateController to channel new error sigils
+- Day 4-5: Align ModeDecisionEngine and craft test harmonics
 
-### Week 2: Recovery Handler (TD-2)
-- Day 1-2: Implement SensorRecoveryHandler
-- Day 3: Integrate with ModeDecisionEngine
-- Day 4-5: Clean up duplicate code and testing
+### Second Alignment: Recovery Harmonics (TD-2)
+- Day 1-2: Craft SensorRecoveryHandler weave and test incantations
+- Day 3: Weave into ModeDecisionEngine while preserving existing harmonics
+- Day 4-5: Reshape evaluate_metrics and makeDecision to channel the recovery weaver
 
-## Success Metrics
+### Final Ritual: Integration and Purification
+- Day 1-2: Dissolve duplicate patterns and string-based echoes
+- Day 3: Perform final harmonization and stability divinations
+- Day 4: Present to the Council of Anchors for blessing
 
-We will measure the success of these refactorings using:
-
-1. **Code metrics**:
-   - Reduction in cyclomatic complexity
-   - Reduction in lines of code for error handling
-   - Improved code duplication metrics
-
-2. **Quality metrics**:
-   - Maintain or improve test coverage
-   - Reduce the number of error-related bugs
-
-3. **Developer experience**:
-   - Ease of adding new error types
-   - Simplicity of recovery logic
-
-## Risks and Mitigations
-
-| Risk | Mitigation |
-|------|------------|
-| Behavioral changes during refactoring | Comprehensive test suite with before/after validation |
-| Performance impact of polymorphism | Benchmark critical paths before and after changes |
-| Learning curve for new abstractions | Document with examples and provide team training | 
+**Lore Tidbit**: The Weaver Caste teaches that true mastery is shown not in perfect weaving, but in elegant mending—for it is in repair that we discover the deepest secrets of our craft. 

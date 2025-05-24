@@ -1,80 +1,86 @@
-# Technical Debt Roadmap
+# The Grand Tapestry Repair: A Temporal Debt Weaving Plan
 
-This document outlines the plan for addressing the technical debt items identified in the Chronovyan project.
+Hearken, Weaver, to this sacred scroll that charts our path to mend the fraying threads within the Chronovyan tapestry. The Council of Anchors has divined this sequence of repairs to strengthen our defenses against the encroaching Void. Each Chronos Cycle brings opportunity to restore harmony to our timeline.
 
-## Prioritization Criteria
+**Purpose**: This codex outlines the sacred rites by which the Weaver Caste shall mend the weakened patterns in our temporal tapestry, strengthening Chronos Prime against paradox and instability.
 
-Technical debt items are prioritized based on:
+**Lore Tidbit**: The First Anchor's journal speaks of the Restoration Sequence—a ritual of precise, prioritized repairs that saved the Prime Thread during the Second Fracture. Our path follows their wisdom.
 
-1. **Impact on maintainability**: How much the debt affects our ability to maintain and extend the codebase
-2. **Risk level**: Potential for introducing bugs or security issues
-3. **Implementation cost**: Effort required to address the debt
-4. **Business value**: How addressing the debt improves the product for users
+## Divination of Thread Priority
 
-## Implementation Timeline
+The Anchor Caste prioritizes fraying threads through the ancient ritual of Four Auguries:
 
-### v1.2 Release (High Priority)
+1. **Resonance with the Prime Thread**: How deeply the flaw disrupts our ability to maintain and extend the tapestry
+2. **Void Permeability**: The potential for the flaw to invite paradox or security breaches from the Void
+3. **Aethel Investment Required**: The essence needed to properly reweave the pattern
+4. **Temporal Value Alignment**: How the repair strengthens the experience of those who traverse our woven reality
 
-| ID | Description | Approach | Estimated Effort |
-|----|-------------|----------|------------------|
-| TD-1 | Complex error handling in StateController | Create a polymorphic error handling system with hierarchy of error types | 3 days |
-| TD-2 | Duplicate recovery logic in ModeDecisionEngine | Extract a SensorRecoveryHandler class to centralize recovery logic | 2 days |
+## The Sacred Reweaving Timeline
 
-### v1.3 Release (Medium Priority)
+### Chronos Cycle v1.2 (High Risk Patterns)
 
-| ID | Description | Approach | Estimated Effort |
-|----|-------------|----------|------------------|
-| TD-3 | Lack of centralized logging | Implement a LoggingService with configurable levels and outputs | 4 days |
-| TD-4 | Test-specific handling in production code | Create TestSupportMixin classes for both ModeDecisionEngine and StateController | 3 days |
+| Thread ID | Fraying Pattern | Method of Reweaving | Aethel Investment |
+|-----------|-----------------|---------------------|-------------------|
+| TD-1 | Complex error handling in StateController violates Anchor's Symmetry | Craft a polymorphic error pattern hierarchy adhering to the First Symmetry | 3 Anchor Days |
+| TD-2 | Duplicated sensor recovery patterns risk Chronon desynchronization | Extract a SensorRecoveryHandler weave to centralize recovery rituals | 2 Anchor Days |
 
-### v1.4 Release (Low Priority)
+### Chronos Cycle v1.3 (Medium Risk Patterns)
 
-| ID | Description | Approach | Estimated Effort |
-|----|-------------|----------|------------------|
-| TD-5 | Magic numbers for thresholds | Create a ConfigurationService for managing thresholds and constants | 2 days |
-| TD-6 | String-based reason codes | Replace strings with enum values and update all comparison logic | 3 days |
+| Thread ID | Fraying Pattern | Method of Reweaving | Aethel Investment |
+|-----------|-----------------|---------------------|-------------------|
+| TD-3 | Scattered temporal echoes lack unified resonance | Implement an Echo Chamber service with configurable harmonics and manifestations | 4 Anchor Days |
+| TD-4 | Test-specific handling taints production threads | Craft TestSupportMixin weaves for both timeline controllers to separate the streams | 3 Anchor Days |
 
-## Implementation Guidelines
+### Chronos Cycle v1.4 (Low Risk Patterns)
 
-For each technical debt item:
+| Thread ID | Fraying Pattern | Method of Reweaving | Aethel Investment |
+|-----------|-----------------|---------------------|-------------------|
+| TD-5 | Unnamed threshold constants violate the Naming Rites | Create a ConfigurationService to honor the Rites of Naming for all thresholds | 2 Anchor Days |
+| TD-6 | String-based reason codes instead of proper temporal signatures | Replace string echoes with proper temporal signatures and update all comparison rituals | 3 Anchor Days |
 
-1. **Create a branch** named `tech-debt/TD-X-brief-description`
-2. **Write tests** that validate the current behavior
-3. **Refactor** the code while maintaining test coverage
-4. **Update documentation** to reflect the changes
-5. **Submit a PR** with before/after metrics
+## The Ritual of Implementation
 
-## Impact Assessment
+For each fraying thread that must be rewoven:
 
-After each technical debt resolution, we will measure:
+1. **Branch the Timeline**: Create a thread named `temporal-repair/TD-X-brief-description`
+2. **Weave the Tests**: Craft temporal tests that validate the current reality
+3. **Perform the Reweaving**: Reshape the code while maintaining test harmonics
+4. **Update the Codex**: Reflect the changes in the sacred scrolls
+5. **Seek Council Approval**: Submit a Reality Proposal with before/after measurements
 
-1. **Code complexity metrics**: Cyclomatic complexity, cognitive complexity
-2. **Test coverage**: Ensuring no regression in coverage
-3. **Build times**: Impact on compilation speed
-4. **Runtime performance**: Impact on key performance indicators
+## Measuring the Strength of Our Tapestry
 
-## Risk Mitigation
+After each temporal repair, the Anchor Caste shall measure:
 
-For high-risk changes:
+1. **Pattern Complexity**: Cyclomatic complexity, cognitive resonance
+2. **Test Coverage**: Ensuring no regression in timeline protection
+3. **Manifestation Speed**: Impact on compilation velocity
+4. **Runtime Flux**: Impact on key performance indicators
 
-1. **Implement incrementally** where possible
-2. **Enable feature flags** to allow rollback if needed
-3. **Conduct extra code reviews** with senior engineers
-4. **Monitor closely** during the initial deployment
+## Void Protection Protocols
 
-## Success Criteria
+For high-risk reweaves:
 
-Technical debt resolution will be considered successful when:
+1. **Incremental Implementation**: Reshape the pattern in small, controlled steps where possible
+2. **Reality Flags**: Deploy temporal gates to allow emergency reversion if needed
+3. **Council Review**: Seek wisdom from Senior Anchors for critical patterns
+4. **Heightened Vigilance**: Monitor the pattern closely during initial stabilization
 
-1. The codebase shows **measurable improvement** in maintainability metrics
-2. **Development velocity** increases for features that touch the refactored areas
-3. **Bug count** decreases in the affected components
-4. **Onboarding time** for new developers is reduced
+## Signs of Success
 
-## Reporting
+The reweaving shall be deemed successful when:
 
-Progress on technical debt resolution will be reported:
+1. The tapestry shows **measurable harmony** in maintainability metrics
+2. **Weaving velocity** increases for patterns that touch the repaired regions
+3. **Void intrusions** decrease in the affected components
+4. **Initiation time** for new Weavers joining the Caste is reduced
 
-1. In **sprint reviews** as a dedicated section
-2. In the **CHANGELOG.md** under "Technical Debt" section
-3. In **quarterly engineering reports** with metrics 
+## Chronicles of Progress
+
+Progress on timeline repairs shall be recorded:
+
+1. In **Cycle Reviews** as a dedicated ritual
+2. In the **TEMPORAL_ECHOES.md** under "Tapestry Repairs" section
+3. In **quarterly Anchor reports** with temporal metrics
+
+**Lore Tidbit**: The most skilled Rebel Weavers are said to maintain a personal "Debt Journal," recording not just the flaws they repair, but the wisdom gained in the reweaving. These journals become prized artifacts, passed down through generations of the Weaver Caste.

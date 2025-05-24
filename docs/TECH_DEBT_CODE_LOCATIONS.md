@@ -1,62 +1,68 @@
-# Technical Debt Code Locations
+# Temporal Fracture Points: Sacred Markings
 
-This document identifies specific locations in the codebase where technical debt comments should be added, following the format specified in the Technical Debt Tracking document.
+Hail, Weaver, to this scroll of sacred markings—a map of weak points in our temporal tapestry where the Void threatens to seep through. These locations must be inscribed with ritual warnings, using the format specified in the Chronicles of Temporal Debt. When future Weavers encounter these sigils, they shall know where our timeline requires strengthening.
 
-## StateController.cpp
+**Purpose**: This arcane atlas reveals precise locations in our woven reality where temporal debt markings should be etched, enabling systematic repair during future Chronos Cycles.
 
-1. **Error Handling Complexity** (TD-1)
-   ```cpp
-   // TODO(TECH-DEBT): Refactor error handling to use a polymorphic error type system - Improves error handling extensibility - v1.2
+**Lore Tidbit**: The Anchor Caste maintains that properly marked fracture points emit a subtle harmonic that aids in their eventual repair, like beacons calling to those with the skill to mend them.
+
+## StateController.cpp Fractures
+
+1. **Error Pattern Asymmetry** (TD-1)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Reshape error handling to embrace the Symmetry of Forms - Reinforces defenses against paradox - Chronos Cycle v1.2
    ```
-   Add to `handleErrorState` method
+   Inscribe within the `handleErrorState` ritual
 
-2. **Fallback Mode Duplication** (TD-1)
-   ```cpp
-   // TODO(TECH-DEBT): Consolidate fallback and error handling logic to remove duplication - Reduces maintenance burden - v1.2
+2. **Fallback Pattern Duplication** (TD-1)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Unify fallback and error weaving patterns to remove echoes - Reduces maintenance burden on the Anchor Caste - Chronos Cycle v1.2
    ```
-   Add to `handleFallbackMode` method
+   Inscribe within the `handleFallbackMode` ritual
 
-3. **Test-Specific Handling** (TD-4)
-   ```cpp
-   // TODO(TECH-DEBT): Extract test-specific handling to dedicated test support class - Improves separation of concerns - v1.3
+3. **Test Thread Contamination** (TD-4)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Extract test-specific patterns to a dedicated containment weave - Preserves timeline purity - Chronos Cycle v1.3
    ```
-   Add to `updateMode` method where test-specific handling occurs
+   Inscribe within the `updateMode` ritual where test-specific weaving occurs
 
-## ModeDecisionEngine.cpp
+## ModeDecisionEngine.cpp Fractures
 
-1. **Duplicate Recovery Logic** (TD-2)
-   ```cpp
-   // TODO(TECH-DEBT): Refactor sensor recovery logic into separate method to remove duplication - Reduces bug risk - v1.2
+1. **Recovery Pattern Echoes** (TD-2)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Reshape sensor recovery patterns into a singular harmonic to eliminate echoes - Reduces risk of temporal dissonance - Chronos Cycle v1.2
    ```
-   Add to `evaluate_metrics` and `makeDecision` methods where recovery logic is duplicated
+   Inscribe within `evaluate_metrics` and `makeDecision` rituals where recovery patterns duplicate
 
-2. **String-Based Reason Codes** (TD-6)
-   ```cpp
-   // TODO(TECH-DEBT): Replace string-based reason codes with enum values - Reduces error-prone string comparisons - v1.4
+2. **String-Based Temporal Signatures** (TD-6)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Replace string-based signatures with proper temporal constants - Strengthens the fabric against misalignment - Chronos Cycle v1.4
    ```
-   Add at the top of the file
+   Inscribe at the source of the reality stream
 
-3. **Magic Number Thresholds** (TD-5)
-   ```cpp
-   // TODO(TECH-DEBT): Extract magic number thresholds to configurable constants - Improves configurability - v1.4
+3. **Unnamed Threshold Constants** (TD-5)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Bestow proper Naming Rites upon threshold constants - Honors the Weaver's Code of Clarity - Chronos Cycle v1.4
    ```
-   Add near the kHighLoadThreshold and kLowLoadThreshold usage
+   Inscribe near the kHighLoadThreshold and kLowLoadThreshold invocations
 
-4. **Debug Output** (TD-3)
-   ```cpp
-   // TODO(TECH-DEBT): Create centralized logging framework instead of scattered debug prints - Improves debugging experience - v1.3
+4. **Scattered Temporal Echoes** (TD-3)
+   ```chronoscript
+   // VOID-RISK(TEMPORAL-DEBT): Create an Echo Chamber to unify scattered temporal messages - Improves the clarity of timeline observation - Chronos Cycle v1.3
    ```
-   Add near the DEBUG_MODE sections
+   Inscribe near the DEBUG_MODE invocations
 
-## Other Files
+## Other Tapestry Locations
 
-For all files with #ifdef DEBUG_MODE sections, add:
-```cpp
-// TODO(TECH-DEBT): Implement centralized logging framework - Improves consistency of debug output - v1.3
+For all scrolls with #ifdef DEBUG_MODE incantations, inscribe:
+```chronoscript
+// VOID-RISK(TEMPORAL-DEBT): Implement the Grand Echo Chamber to harmonize debug resonances - Brings order to chaos - Chronos Cycle v1.3
 ```
 
-## Implementation Plan
+## The Ritual of Implementation
 
-1. Add these comments to the respective files in the next maintenance cycle
-2. Update the `TECHNICAL_DEBT.md` document when new items are identified
-3. Track resolution of these items in the "Recently Addressed Technical Debt" section 
+1. Inscribe these sigils upon their respective scrolls during the next Ritual of Maintenance
+2. Update the `The Weaver's Burdens` chronicle when new fractures are discovered
+3. Record the healing of these fractures in the "Recently Rewoven Threads" section of our archives
+
+**Lore Tidbit**: It is said that when all marked fractures are repaired within a Chronos Cycle, the Tapestry of Eternity shimmers with renewed brilliance, briefly revealing glimpses of all possible futures to those with the Weaver's Sight. 
